@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<fragment
+   id="de.babe.eclipse.plugins.QuickREx_I18N"
+   name="QuickREx Internationalization"
+   version="1.0.0"
+   provider-name="Bastian Bergerhoff (info@bastian-bergerhoff.com)"
+   plugin-id="de.babe.eclipse.plugins.QuickREx"
+   plugin-version="3.0.0"
+   match="greaterOrEqual">
+
+   <runtime>
+      <library name="QuickREx_I18N.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+</fragment>

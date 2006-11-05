@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regularExpressionLibrary>
+  <category>
+    <name>その他</name>
+    <reLibraryEntry>
+      <title>ISBN番号</title>
+      <re>ISBN\x20(?=.{13}$)\d{1,5}([- ])\d{1,7}\1\d{1,6}\1(\d|X)$</re>
+      <description>この正規表現はISBN番号をフォーマットします. 詳細はこちら 
+http://www.isbn.org/standards/home/isbn/international/html/usm4.htm 
+ISBNは常にISBNの文字の後に10桁の文字が続き,10桁の文字は4つに分割され,明確にハイフン,またはスペースで区切られます
+
+ノート: 
+'複数行'フラグを有効にしたJDK実装で動作します.
+数字だけのフォーマットは検証することができません. 
+これはSteven Smithの式の一部です http://www.regexlib.com/REDetails.aspx?regexp_id=79</description>
+      <testText>ISBN 0 93028 923 4
+ISBN 1-56389-668-0
+ISBN 1-56389-016-X
+123456789X
+ISBN 9-87654321-2
+ISBN 123 456-789X
+</testText>
+      <source>Michael Ash www.regexlib.com, see http://www.regexlib.com/REDetails.aspx?regexp_id=463</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>マスターカード番号</title>
+      <re>^(?:(?:51)|(?:52)|(?:53)|(?:54)|(?:55))[0-9]{14}$</re>
+      <description>マスターカードのカード番号の検証です. すべてのマスターカード番号は51から55の間で始まり 
+14桁のほかの番号が続きます.
+
+ノート: '複数行'フラグを有効にしたJDK実装で動作します</description>
+      <testText>5125632154125412
+5225632154125412
+5525632154125412
+1599999999999999
+5625632154125412
+4825632154125412
+6011632154125412</testText>
+      <source>Jeff Johns for www.regexplib.com, see http://www.regexlib.com/REDetails.aspx?regexp_id=948, slightly modified</source>
+    </reLibraryEntry>
+  </category>
+  <category>
+    <name>XML, HTML, その他</name>
+    <reLibraryEntry>
+      <title>タグ (1)</title>
+      <re>&lt;TAG[^&gt;/]*&gt;(.*?)&lt;/TAG&gt;</re>
+      <description>これはHTMLタグにマッチするシンプルな正規表現です.('TAG'を探したいHTMLタグ名に変えてください)
+
+"DOTALL"フラグを有効にしたJava実装,または"単一行"フラグを有効にしたORO-Perl実装は複数行にわたるタグにマッチします.
+注意: 空タグ (&lt;xml attribute="value"/&gt; など) はマッチしません.</description>
+      <testText>&lt;b&gt;This is bold&lt;/b&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some list entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;xml attribute="value"/&gt;
+&lt;xml attribute="value"&gt;contents&lt;/xml&gt;</testText>
+      <source>http://www.regular-expressions.info/examples.html, slightly adapted</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>タグ (2)</title>
+      <re>&lt;([A-Za-z][A-Za-z0-9]*)[^&gt;/]*&gt;(.*?)&lt;/\1&gt;</re>
+      <description>タグにマッチするシンプルな正規表現です.
+
+
+"DOTALL"フラグを有効にしたJava実装,または"単一行"フラグを有効にしたORO-Perl実装は複数行にわたるタグにマッチします.
+注意: 空タグ (&lt;xml attribute="value"/&gt; など) はマッチしません.</description>
+      <testText>&lt;b&gt;This is bold&lt;/b&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some list entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;xml attribute="value"/&gt;
+&lt;xml attribute="value"&gt;contents&lt;/xml&gt;</testText>
+      <source>http://www.regular-expressions.info/examples.html, slightly adapted</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>タグ (3)</title>
+      <re>(?:&lt;([A-Za-z][A-Za-z0-9]*)[^&gt;/]*&gt;(.*?)&lt;/\1&gt;)|(?:&lt;([A-Za-z][A-Za-z0-9]*)[^&gt;/]*/&gt;)</re>
+      <description>開始タグ、終了タグのペア、または空タグにマッチします
+
+"DOTALL"フラグを有効にしたJava実装,または"単一行"フラグを有効にしたORO-Perl実装は複数行にわたるタグにマッチします.
+ ネストしたタグは分割してマッチしないことに注意してください.
+</description>
+      <testText>&lt;b&gt;This is bold&lt;/b&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some list entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;xml attribute="value"/&gt;
+&lt;xml attribute="value"&gt;contents&lt;/xml&gt;</testText>
+      <source>QuickREx</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>空タグ</title>
+      <re>&lt;([A-Za-z][A-Za-z0-9]*)[^&gt;/]*/&gt;</re>
+      <description>空タグにマッチします.
+
+"DOTALL"フラグを有効にしたJava実装,または"単一行"フラグを有効にしたORO-Perl実装は複数行にわたるタグにマッチします.
+</description>
+      <testText>&lt;b&gt;This is bold&lt;/b&gt;
+&lt;ul&gt;
+  &lt;li&gt;Some list entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br/&gt;
+&lt;xml attribute="value"&gt;contents&lt;/xml&gt;
+&lt;xml attribute="value"/&gt;
+</testText>
+      <source>QuickREx</source>
+    </reLibraryEntry>
+  </category>
+  <category>
+    <name>IPアドレスなど</name>
+    <reLibraryEntry>
+      <title>IPアドレス</title>
+      <re>\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b</re>
+      <description>IPアドレスにマッチします (IPv4). </description>
+      <testText>255.255.255.255
+255.0.1.2
+255...
+256.1.1.1
+</testText>
+      <source>http://www.regular-expressions.info/examples.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>IPアドレスとグループ</title>
+      <re>\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b</re>
+      <description>IPアドレスにマッチします (IPv4). そして分割できない部分をグループにします.</description>
+      <testText>255.255.255.255
+255.1.245.0
+255...
+256.1.1.1</testText>
+      <source>http://www.regular-expressions.info/examples.html</source>
+    </reLibraryEntry>
+  </category>
+  <category>
+    <name>テキスト</name>
+    <reLibraryEntry>
+      <title>行頭の空白</title>
+      <re>^[ \t]+</re>
+      <description>行頭のスペースやタブを探します (複数のスペースや,スペースとタブの混合もです).
+      
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します</description>
+      <testText>A line with trailing space 
+ A line with leading space
+A line with trailing tab  
+  A line with leading tab
+A line without leading or trimming space
+ A line with leading space and trailing tab  
+    A line with 2 spaces and a tab in front
+And a line with a tab and two spaces trailing...    </testText>
+      <source>http://www.regular-expressions.info/examples.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>行末の空白</title>
+      <re>[ \t]+$</re>
+      <description>行末のスペースやタブを探します (複数のスペースや,スペースとタブの混合もです).
+      
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します</description>
+      <testText>A line with trailing space 
+ A line with leading space
+A line with trailing tab  
+  A line with leading tab
+A line without leading or trimming space
+ A line with leading space and trailing tab  
+    A line with 2 spaces and a tab in front
+And a line with a tab and two spaces trailing...    </testText>
+      <source>http://www.regular-expressions.info/examples.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>行頭,行末の空白</title>
+      <re>^[ \t]+|[ \t]+$</re>
+      <description>行頭,行末のスペースやタブを探します (複数のスペースや,スペースとタブの混合もです).
+      
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します</description>
+      <testText>A line with trailing space 
+ A line with leading space
+A line with trailing tab  
+  A line with leading tab
+A line without leading or trimming space
+ A line with leading space and trailing tab  
+    A line with 2 spaces and a tab in front
+And a line with a tab and two spaces trailing...    </testText>
+      <source>http://www.regular-expressions.info/examples.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>'FOO'を含んだ行</title>
+      <re>^.*FOO.*$</re>
+      <description>ある単語を含んだ行にマッチします(今回は'FOO'です).
+
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します - ORO-Awk実装を
+使うことは出来ません (文章全体にマッチしてしまいます)</description>
+      <testText>This line conains FOO
+This one does not
+The next line is only FOO
+FOO
+This and the next line does not contain
+the word you are looking for</testText>
+      <source>http://www.regular-expressions.info/completelines.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>'FOO'と'BAR'を含んだ行</title>
+      <re>^(?=.*?\bFOO\b)(?=.*?\bBAR\b).*$</re>
+      <description>複数の単語を含んだ行にマッチします (今回は'FOO'と'BAR'です).
+
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します - ORO-Awk実装を
+使うことは出来ません (先読みをすることが出来ないので)</description>
+      <testText>This line conains FOO and BAR
+This one contains neither
+The next line is only FOO
+FOO
+This line containes FOO but not the other word you are looking for
+whereas this one does not contain one but BAR (i.e. the other)
+FOOBAR?
+FOO BAR!</testText>
+      <source>http://www.regular-expressions.info/completelines.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>'FOO'と'BAR' 'お互いの間'</title>
+      <re>\b(?:FOO\W+(?:\w+\W+){1,6}BAR|BAR\W+(?:\w+\W+){1,6}FOO)\b</re>
+      <description>二つの文字と、それらの間にある文字が6語以下(今回は)場合にマッチします</description>
+      <testText>FOO BAR are direct neighbors here, 'B..' is far away from the 'F..' on the next line
+FOO and BAR are separated by one word, 'B..' is far away from the 'F..' on the next line
+FOO is here and there a a whole lot of words between it and BAR, 'B..' is far away from the 'F..' on the next line
+FOO is here but not the other word, 'F..' is far away from the 'B..' on the next line
+BAR first, then FOO, 'F..' is far away from the 'B..' on the next line
+BAR is
+here then FOO (note: line-breaks don't count)</testText>
+      <source>http://www.regular-expressions.info/near.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>複雑なパターン</title>
+      <re>^(?=.*?\bFOO\b)(?=.*?\bfoo\b)(?:(?!BAR|bar).)*$</re>
+      <description>'FOO'と'foo'を含み,'BAR'も'bar'も含まない行にマッチします
+
+'複数行'フラグを有効にしたJava実装,ORO-Perl実装で動作します - ORO-Awk実装を
+使うことは出来ません (先読みをすることが出来ないので)</description>
+      <testText>This line conains FOO and BAR
+This one contains neither
+The next line is only FOO, large and small
+FOO foo
+This line containes FOO but not the other word you are looking for
+this one containes FOO and foo but also BAR
+this one containes FOO and foo but also bar
+FOO foo BAR?
+FOO foo!
+</testText>
+      <source>http://www.regular-expressions.info/completelines.html, わずかに適用できる</source>
+    </reLibraryEntry>
+  </category>
+  <category>
+    <name>日付</name>
+    <reLibraryEntry>
+      <title>日付の検証 yyyy-mm-dd</title>
+      <re>(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])</re>
+      <description>これは1900-01-01から2099-12-31までのyyyy-mm-dd形式にマッチします.
+      区切り文字には (' ', '-', '/', '.')を使うことが出来ます. 
+
+この式は月の長さを無視します.</description>
+      <testText>1900-01-01 1900/01/01 1900.01.01 1900 01 01 1900-01.01 1900 13 01 1900 02 31</testText>
+      <source>http://www.regular-expressions.info/dates.html</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>日付の検証, dd-mm-yyyy</title>
+      <re>(0[1-9]|[12][0-9]|3[01])([- /.])(0[1-9]|1[012])\2(19|20)\d\d</re>
+      <description>これは01 01 1900から31 12 2099までのdd-mm-yyyy形式にマッチします.
+      区切り文字には (' ', '-', '/', '.')を使うことが出来ます
+
+この式は月の長さを無視します.</description>
+      <testText>01-01-1900 01/01/1900  01.01.1900 01 01 1900 01.01 1900 01 13 1900 31 02 1900</testText>
+      <source>http://www.regular-expressions.info/dates.html</source>
+    </reLibraryEntry>
+  </category>
+  <category>
+    <name>数値</name>
+    <reLibraryEntry>
+      <title>1.000単位の区切り</title>
+      <re>[-+]?(?:(?:[1-9]\d{0,2}(?:\.\d\d\d)*)|0),\d{2}(?!\d)</re>
+      <description>以下の数値にマッチします:
+- ',' を小数点として使い, '.' を1.000単位の区切りとしている
+- 小数点第二位まである
+- 0,xyの形式でない場合は,前方に0が付かない (例. 01,00はマッチしない)
+- '+'か'-'が前方についている
+
+先読みをしないのでORO-AWK実装では動作しない.</description>
+      <testText>1.000.000,00 is not the same as a 1.000.000,01
+123.123.123.123,12
+0,00
+00,00
+1,005
+,00</testText>
+      <source>QuickREx</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>正の実数</title>
+      <re>(^\d*\.?\d*[0-9]+\d*$)|(^[0-9]+\d*\.\d*$)</re>
+      <description>すべての正の実数にマッチします.
+
+'複数行'フラグを有効にしてください. ORO実装では動作しません.</description>
+      <testText>0.00
+1.23
+4.56
+-1.03
+-0.00
+1
+1.2.3
+</testText>
+      <source>Derek Noonan for www.regexlib.com, see http://www.regexlib.com/REDetails.aspx?regexp_id=1036</source>
+    </reLibraryEntry>
+    <reLibraryEntry>
+      <title>浮動小数点</title>
+      <re>[-+]?[0-9]*\.?[0-9]+</re>
+      <description>浮動小数点にマッチします.(+-があっても大丈夫). 
+
+この式は単語に含まれる数値 ('a19'など)を除外することが出来ないことに注意してください. 
+これは,'1.2.3'といった表現に対してわずかに意図しない動作をするためです(これは'1.2'と'.3'にマッチします).</description>
+      <testText>19 
+19a 
+a19 
+,123 
+.123 
+0.123 
+12345.6789 
+0 
+0.0 
+-1.2345 
++1.2345
+1.2.3</testText>
+      <source>http://www.regular-expressions.info/floatingpoint.html</source>
+    </reLibraryEntry>
+  </category>
+</regularExpressionLibrary>

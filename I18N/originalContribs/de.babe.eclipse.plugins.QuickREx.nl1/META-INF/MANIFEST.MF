@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Nl1 Fragment
+Bundle-SymbolicName: de.babe.eclipse.plugins.QuickREx.nl1
+Bundle-Version: 1.0.0
+Fragment-Host: de.babe.eclipse.plugins.QuickREx;bundle-version="2.1.0"
+Bundle-Localization: plugin

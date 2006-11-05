@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+     <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml">
+      </toc>
+      <toc
+            file="help.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="%de.babe.eclipse.plugins.QuickREx"
+            id="de.babe.eclipse.plugins.QuickREx"/>
+      <view
+            class="de.babe.eclipse.plugins.quickREx.views.QuickRExView"
+            icon="icons/plugin.gif"
+            category="de.babe.eclipse.plugins.QuickREx"
+            name="%de.babe.eclipse.plugins.quickREx.views.QuickRExView"
+            id="de.babe.eclipse.plugins.quickREx.views.QuickRExView"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.TaskList"
+               id="de.babe.eclipse.plugins.quickREx.views.QuickRExView"/>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <fontDefinition
+            isEditable="true"
+            defaultsTo="org.eclipse.jface.dialogfont"
+            label="%de.babe.eclipse.plugins.QuickREx.textfontDefinition"
+            categoryId="de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.textfontDefinition">
+         <description>
+            Font used for test-texts and Reg. Exp.s in QuickREx-View
+         </description>
+      </fontDefinition>
+      <colorDefinition
+            value="COLOR_YELLOW"
+            isEditable="true"
+            label="%de.babe.eclipse.plugins.QuickREx.matchBgColor"
+            categoryId="de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.matchBgColor">
+         <description>
+            Background-Color for matches in QuickREx-View
+         </description>
+      </colorDefinition>
+      <colorDefinition
+            value="COLOR_BLACK"
+            isEditable="true"
+            label="%de.babe.eclipse.plugins.QuickREx.matchFgColor"
+            categoryId="de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.matchFgColor">
+         <description>
+            Foreground-Color for matches in QuickREx-View
+         </description>
+      </colorDefinition>
+      <colorDefinition
+            value="COLOR_GREEN"
+            isEditable="true"
+            label="%de.babe.eclipse.plugins.QuickREx.currentMatchBgColor"
+            categoryId="de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.currentMatchBgColor">
+         <description>
+            Background-Color for current match in QuickREx-View
+         </description>
+      </colorDefinition>
+      <colorDefinition
+            value="COLOR_BLACK"
+            isEditable="true"
+            label="%de.babe.eclipse.plugins.QuickREx.currentMatchFgColor"
+            categoryId="de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.currentMatchFgColor">
+         <description>
+            Foreground-Color for current match in QuickREx-View
+         </description>
+      </colorDefinition>
+      <themeElementCategory
+            label="%de.babe.eclipse.plugins.QuickREx.themeElementCategory"
+            id="de.babe.eclipse.plugins.QuickREx.themeElementCategory">
+         <description>
+            Fonts and Colors for the QuickREx-View
+         </description>
+      </themeElementCategory>    
+   </extension>
+
+</plugin>

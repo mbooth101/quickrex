@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--/*******************************************************************************
+ * Copyright (c) 2005 Bastian Bergerhoff and others
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution.
+ * 
+ * Contributors:
+ *     Bastian Bergerhoff - initial contents
+ *******************************************************************************/-->
+<completions>
+  <proposal key="\\" value="\\" allowPlain="true" displayString="バックスラッシュ" additionalInfo="\\">
+    <retrigger re=".*[^\\]\\$" completion="\"/>
+    <retrigger re=".*\A\\$" completion="\"/>
+  </proposal>
+  <proposal key="\0" value="\0" allowPlain="true" displayString="8進値" additionalInfo="0n を持つ文字 (0 &lt;= n &lt;= 7)">
+    <retrigger re=".*[^\\]\\$" completion="0"/>
+    <retrigger re=".*\A\\$" completion="0"/>
+  </proposal>
+  <proposal key="\x" value="\x" allowPlain="true" displayString="16進値" additionalInfo="\x - \xhh は 0xhh と等価です.">
+    <retrigger re=".*[^\\]\\$" completion="x"/>
+    <retrigger re=".*\A\\$" completion="x"/>
+  </proposal>
+  <proposal key="\u" value="\u" allowPlain="true" displayString="2バイト文字の16進値" additionalInfo="\u - \uxhhhh は 0xhhhh と等価です.">
+    <retrigger re=".*[^\\]\\$" completion="u"/>
+    <retrigger re=".*\A\\$" completion="u"/>
+  </proposal>
+  <proposal key="\t" value="\t" allowPlain="true" displayString="タブ" additionalInfo="\t - \u0009">
+    <retrigger re=".*[^\\]\\$" completion="t"/>
+    <retrigger re=".*\A\\$" completion="t"/>
+  </proposal>
+  <proposal key="\n" value="\n" allowPlain="true" displayString="改行(LF)" additionalInfo="\n - \u000A">
+    <retrigger re=".*[^\\]\\$" completion="n"/>
+    <retrigger re=".*\A\\$" completion="n"/>
+  </proposal>
+  <proposal key="\r" value="\r" allowPlain="true" displayString="改行(CR)" additionalInfo="\r - \u000D">
+    <retrigger re=".*[^\\]\\$" completion="r"/>
+    <retrigger re=".*\A\\$" completion="r"/>
+  </proposal>
+  <proposal key="\f" value="\f" allowPlain="true" displayString="改ページ(FF)" additionalInfo="\f - \u000C">
+    <retrigger re=".*[^\\]\\$" completion="f"/>
+    <retrigger re=".*\A\\$" completion="f"/>
+  </proposal>
+  <proposal key="\a" value="\a" allowPlain="true" displayString="警告(ベル)文字" additionalInfo="\a - \u0007">
+    <retrigger re=".*[^\\]\\$" completion="a"/>
+    <retrigger re=".*\A\\$" completion="a"/>
+  </proposal>
+  <proposal key="\e" value="\e" allowPlain="true" displayString="エスケープ文字" additionalInfo="\e - \u001B">
+    <retrigger re=".*[^\\]\\$" completion="e"/>
+    <retrigger re=".*\A\\$" completion="e"/>
+  </proposal>
+  <proposal key="\c" value="\c" allowPlain="true" displayString="制御文字" additionalInfo="\c">
+    <retrigger re=".*[^\\]\\$" completion="c"/>
+    <retrigger re=".*\A\\$" completion="c"/>
+  </proposal>
+  <proposal key="." value="." allowPlain="true" displayString="任意の文字" additionalInfo=". - 行末文字にマッチするかどうかはフラグに依存します. (?sフラグを設定して.ALLモードにすることが出来ます)">
+  </proposal>
+  <proposal key="\d" value="\d" allowPlain="true" displayString="数字" additionalInfo="\d - [0-9]  例えば,0,1,2,3,4,5,6,7,8,9">
+    <retrigger re=".*[^\\]\\$" completion="d"/>
+    <retrigger re=".*\A\\$" completion="d"/>
+  </proposal>
+  <proposal key="\D" value="\D" allowPlain="true" displayString="数字以外" additionalInfo="\D - [^0-9] 0,1,2,3,4,5,6,7,8,9ではない奴">
+    <retrigger re=".*[^\\]\\$" completion="D"/>
+    <retrigger re=".*\A\\$" completion="D"/>
+  </proposal>
+  <proposal key="\s" value="\s" allowPlain="true" displayString="空白文字" additionalInfo="\s - [ \t\n\x0B\f\r]">
+    <retrigger re=".*[^\\]\\$" completion="s"/>
+    <retrigger re=".*\A\\$" completion="s"/>
+  </proposal>
+  <proposal key="\S" value="\S" allowPlain="true" displayString="空白文字以外" additionalInfo="\S - [^\s]">
+    <retrigger re=".*[^\\]\\$" completion="S"/>
+    <retrigger re=".*\A\\$" completion="S"/>
+  </proposal>
+  <proposal key="\w" value="\w" allowPlain="true" displayString="単語構成文字" additionalInfo="\w - [a-zA-Z_0-9] 標準の文字やアンダースコア. また,数字など">
+    <retrigger re=".*[^\\]\\$" completion="w"/>
+    <retrigger re=".*\A\\$" completion="w"/>
+  </proposal>
+  <proposal key="\W" value="\W" allowPlain="true" displayString="非単語文字" additionalInfo="\W - [^a-zA-Z_0-9]">
+    <retrigger re=".*[^\\]\\$" completion="W"/>
+    <retrigger re=".*\A\\$" completion="W"/>
+  </proposal>
+  <proposal key="^" value="^" allowPlain="true" displayString="行頭" additionalInfo="^ - 行の開始">
+  </proposal> 
+  <proposal key="$" value="$" allowPlain="true" displayString="行末" additionalInfo="$ - 行の末尾">
+  </proposal>
+  <proposal key="\b" value="\b" allowPlain="true" displayString="単語境界" additionalInfo="\b - 単語の開始(境界は単語文字,[a-zA-Z_0-9]で構成されます)">
+    <retrigger re=".*[^\\]\\$" completion="b"/>
+    <retrigger re=".*\A\\$" completion="b"/> 
+  </proposal>
+  <proposal key="\B" value="\B" allowPlain="true" displayString="非単語境界" additionalInfo="\B - 単語の開始でも終わりでもないところ(境界は単語文字,[a-zA-Z_0-9]で構成されます)">
+    <retrigger re=".*[^\\]\\$" completion="B"/>
+    <retrigger re=".*\A\\$" completion="B"/> 
+  </proposal>
+  <proposal key="\A" value="\A" allowPlain="true" displayString="入力の先頭" additionalInfo="\A - 入力の先頭">
+    <retrigger re=".*[^\\]\\$" completion="A"/>
+    <retrigger re=".*\A\\$" completion="A"/> 
+  </proposal>
+  <proposal key="\G" value="\G" allowPlain="true" displayString="前回のマッチの末尾" additionalInfo="\G - 前回のマッチの末尾">
+    <retrigger re=".*[^\\]\\$" completion="G"/>
+    <retrigger re=".*\A\\$" completion="G"/>
+  </proposal>
+  <proposal key="\Z" value="\Z" allowPlain="true" displayString="\Z" additionalInfo="\Z - 入力の末尾 (最後の行末記号がある場合は、それを除く)">
+    <retrigger re=".*[^\\]\\$" completion="Z"/>
+    <retrigger re=".*\A\\$" completion="Z"/> 
+  </proposal>
+  <proposal key="\z" value="\z" allowPlain="true" displayString="入力の末尾" additionalInfo="\z - 入力の末尾 ">
+    <retrigger re=".*[^\\]\\$" completion="z"/>
+    <retrigger re=".*\A\\$" completion="z"/> 
+  </proposal> 
+  <proposal key="?" value="?" allowPlain="false" displayString="1回または0回のマッチ" additionalInfo="? - 1回、または0回のマッチを行う. 最長一致数量子: 入力を読む間,マッチを試みる.&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="?"/>
+    <retrigger re=".*\\\\$" completion="?"/>
+  </proposal> 
+  <proposal key="*" value="*" allowPlain="false" displayString="0回以上のマッチ" additionalInfo="* - 0回以上のマッチを行う. &#x000A;&#x000A;最長一致数量子: 入力を読む間,マッチを試みる&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="*"/>
+    <retrigger re=".*\\\\$" completion="*"/>
+  </proposal> 
+  <proposal key="+" value="+" allowPlain="false" displayString="1回以上のマッチ" additionalInfo="+ - 1回以上のマッチを行う. &#x000A;&#x000A;最長一致数量子: 入力を読む間,マッチを試みる&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="+"/> 
+    <retrigger re=".*\\\\$" completion="+"/>
+  </proposal> 
+  <proposal key="{n}" value="{}" allowPlain="false" displayString="n回のマッチ" additionalInfo="{n} - n回のマッチを行う. &#x000A;&#x000A;最長一致数量子: 入力を読む間,マッチを試みる&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{}"/> 
+    <retrigger re=".*\\\\$" completion="{}"/> 
+    <retrigger re=".*\{\d*$" completion="}"/> 
+  </proposal> 
+  <proposal key="{n,}" value="{,}" allowPlain="false" displayString="n回以上のマッチ" additionalInfo="{n,} - n回以上のマッチを行う. &#x000A;&#x000A;最長一致数量子: 入力を読む間,マッチを試みる&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}"/> 
+    <retrigger re=".*\\\\$" completion="{,}"/> 
+    <retrigger re=".*\{\d*$" completion=",}"/>  
+    <retrigger re=".*\{\d*,$" completion="}"/>  
+  </proposal> 
+  <proposal key="{n,m}" value="{,}" allowPlain="false" displayString="n回以上,m回以下のマッチ" additionalInfo="{n,m} - 少なくともn回,最大でm回のマッチを行う. &#x000A;&#x000A;最長一致数量子: 入力を読む間,マッチを試みる&#x000A;マッチを検出すると、(繰り返し) 1文字引き返し &#x000A;再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}"/> 
+    <retrigger re=".*\\\\$" completion="{,}"/> 
+    <retrigger re=".*\{\d*$" completion=",}"/> 
+    <retrigger re=".*\{\d*,\d*$" completion="}"/>  
+  </proposal> 
+  <proposal key="??" value="??" allowPlain="false" displayString="1回または0回のマッチ (左から右)" additionalInfo="?? - 1回、または0回のマッチを行う &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\?\\]$" completion="??"/>
+    <retrigger re=".*\\\\$" completion="??"/>
+    <retrigger re=".*[^\?]\?$" completion="?"/>
+  </proposal> 
+  <proposal key="*?" value="*?" allowPlain="false" displayString="0回以上のマッチ(左から右)" additionalInfo="*? - 0回以上のマッチを行う. &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\*\\]$" completion="*?"/>
+    <retrigger re=".*\\\\$" completion="*?"/>
+    <retrigger re=".+\*$" completion="?"/>
+  </proposal> 
+  <proposal key="+?" value="+?" allowPlain="false" displayString="ｊ回以上のマッチ(左から右)" additionalInfo="+? - 1回以上のマッチを行う. &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\+\\]$" completion="+?"/>
+    <retrigger re=".*\\\\$" completion="+?"/>
+    <retrigger re=".+\+$" completion="?"/> 
+  </proposal> 
+  <proposal key="{n}?" value="{}?" allowPlain="false" displayString="n回のマッチ(左から右)" additionalInfo="{n}? - n回のマッチを行う. &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{}?"/> 
+    <retrigger re=".*\\\\$" completion="{}?"/> 
+    <retrigger re=".+\{\d*$" completion="}?"/> 
+    <retrigger re=".+\{\d*\}$" completion="?"/> 
+  </proposal> 
+  <proposal key="{n,}?" value="{,}?" allowPlain="false" displayString="n回以上のマッチ(左からｗ右)" additionalInfo="{n,}? - n回以上のマッチを行う. &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}?"/> 
+    <retrigger re=".*\\\\$" completion="{,}?"/> 
+    <retrigger re=".+\{\d*$" completion=",}?"/> 
+    <retrigger re=".+\{\d*,$" completion="}?"/> 
+    <retrigger re=".+\{\d*,\}$" completion="?"/> 
+  </proposal> 
+  <proposal key="{n,m}?" value="{,}?" allowPlain="false" displayString="n回以上,m回以下のマッチ" additionalInfo="{n,m}? - 少なくともn回,最大でm回のマッチを行う. &#x000A;&#x000A;最短一致数量子: 入力の最初の一文字を読み, &#x000A;マッチを試みる. そして(繰り返し) 次の文字を読んで再びマッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}?"/> 
+    <retrigger re=".*\\\\$" completion="{,}?"/> 
+    <retrigger re=".+\{\d*$" completion=",}?"/> 
+    <retrigger re=".+\{\d*,\d*$" completion="}?"/> 
+    <retrigger re=".+\{\d*,\d*\}$" completion="?"/> 
+  </proposal> 
+  <proposal key="?+" value="?+" allowPlain="false" displayString="0回または1回のフルテキストマッチ" additionalInfo="?+ - 0回または1回のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\?\\]$" completion="?+"/>
+    <retrigger re=".*\\\\$" completion="?+"/>
+    <retrigger re=".*[^\?]\?$" completion="+"/>
+  </proposal> 
+  <proposal key="*+" value="*+" allowPlain="false" displayString="0回以上のフルテキストマッチ" additionalInfo="*+ - 0回以上のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\*\\]$" completion="*+"/>
+    <retrigger re=".*\\\\$" completion="*+"/>
+    <retrigger re=".+\*$" completion="+"/>
+  </proposal> 
+  <proposal key="++" value="++" allowPlain="false" displayString="1回以上のフルテキストマッチ" additionalInfo="++ - 1回以上のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\+\\]$" completion="++"/>
+    <retrigger re=".*\\\\$" completion="++"/>
+    <retrigger re=".+\+$" completion="+"/> 
+  </proposal> 
+  <proposal key="{n}+" value="{}+" allowPlain="false" displayString="n回のフルテキストマッチ" additionalInfo="{n}+ - n回のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{}+"/> 
+    <retrigger re=".*\\\\$" completion="{}+"/> 
+    <retrigger re=".+\{\d*$" completion="}+"/> 
+    <retrigger re=".+\{\d*\}$" completion="+"/> 
+  </proposal> 
+  <proposal key="{n,}+" value="{,}+" allowPlain="false" displayString="n回以上のフルテキストマッチ" additionalInfo="{n,}+ - n回以上のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}+"/> 
+    <retrigger re=".*\\\\$" completion="{,}+"/> 
+    <retrigger re=".+\{\d*$" completion=",}+"/> 
+    <retrigger re=".+\{\d*,$" completion="}+"/> 
+    <retrigger re=".+\{\d*,\}$" completion="+"/> 
+  </proposal> 
+  <proposal key="{n,m}?" value="{,}+" allowPlain="false" displayString="n回以上,m回以下のフルテキストマッチ" additionalInfo="{n,m}+ - 少なくともn回,最大でm回のマッチを行う. &#x000A;&#x000A;強欲な数量子: 入力を読み込む間マッチを試みる.">
+    <retrigger re=".*[^\\]$" completion="{,}+"/> 
+    <retrigger re=".*\\\\$" completion="{,}+"/> 
+    <retrigger re=".+\{\d*$" completion=",}+"/> 
+    <retrigger re=".+\{\d*,\d*$" completion="}+"/> 
+    <retrigger re=".+\{\d*,\d*\}$" completion="+"/> 
+  </proposal> 
+  <proposal key="U|V" value="|" allowPlain="true" displayString="U または V" additionalInfo="U|V - 縦棒の左、または右の式にマッチする.">
+  </proposal>
+  <proposal key="(U)" value="()" allowPlain="true" displayString="Uをグループとしてマーク" additionalInfo="(U)">
+    <retrigger re=".*\(.*$" completion=")"/> 
+  </proposal> 
+  <proposal key="\i" value="\" allowPlain="true" displayString="グループiとしてマッチ" additionalInfo="\i - グループiとしてマッチする">
+  </proposal> 
+  <proposal key="\" value="\" allowPlain="true" displayString="次の文字をエスケープする" additionalInfo="\ - 特殊文字のエスケープ (例. \\ はバックスラッシュにマッチ)">
+  </proposal> 
+  <proposal key="\Q" value="\Q" allowPlain="true" displayString="エスケープの開始" additionalInfo="\Q - \E までのすべての文字をエスケープする">
+    <retrigger re=".*[^\\]\\$" completion="Q"/>
+    <retrigger re=".*\A\\$" completion="Q"/>
+  </proposal> 
+  <proposal key="\E" value="\E" allowPlain="false" displayString="エスケープの終了" additionalInfo="\E - \Q で開始された引用をエスケープする">
+    <retrigger re=".*\\Q(.*[^\\])$" completion="\E"/>
+    <retrigger re=".*\\Q(.*[^\\])\\$" completion="E"/>
+  </proposal> 
+  <proposal key="[ecq]" value="[]" allowPlain="true" displayString="単純クラス" additionalInfo="例: [ecq] - eまたはcまたはq">
+    <retrigger re=".*\[(.*)$" completion="]"/>
+  </proposal>
+  <proposal key="[^ecq]" value="[^]" allowPlain="true" displayString="否定" additionalInfo="例: [^ecq] - eでもcでもqでもない">
+    <retrigger re=".*\[(.*)$" completion="^]"/>
+    <retrigger re=".*\[\^(.*)$" completion="]"/>
+  </proposal>
+  <proposal key="[e-q]" value="[-]" allowPlain="true" displayString="範囲" additionalInfo="例: [e-q] - ASCIIコードの範囲でのeからqまでの文字(結合)">
+    <retrigger re=".*\[(.+)$" completion="-]"/>
+    <retrigger re=".*\[(.*-.*)$" completion="]"/>
+  </proposal>
+  <proposal key="&amp;&amp;" value="&amp;&amp;[]" allowPlain="true" displayString="交差" additionalInfo="例: [e-q&amp;&amp;[def]] - [e-q]と[def]の交差, eとfにマッチする">
+    <retrigger re=".*\[(.*)$" completion="&amp;&amp;[]"/>
+    <retrigger re=".*\[(.*)&amp;$" completion="&amp;[]"/>
+    <retrigger re=".*\[(.*)&amp;&amp;$" completion="[]"/>
+  </proposal>
+  <proposal key="\p{Lower}" value="\p{Lower}" allowPlain="true" displayString="小文字の英字(US-ASCII)" additionalInfo="\p{Lower} - (US-ASCII) 小文字の英字, [a-z]">
+    <wordtrigger word="\p{Lower" completion="}"/>
+  </proposal>
+  <proposal key="\P{Lower}" value="\P{Lower}" allowPlain="true" displayString="小文字の英字でないもの(US-ASCII)" additionalInfo="\P{Lower} - (US-ASCII) 小文字の英字でないもの, [^a-z]">
+    <wordtrigger word="\P{Lower" completion="}"/>
+  </proposal>
+  <proposal key="\p{Upper}" value="\p{Upper}" allowPlain="true" displayString="大文字の英字 (US-ASCII)" additionalInfo="\p{Upper} - (US-ASCII) 大文字の英字, [A-Z]">
+    <wordtrigger word="\p{Upper" completion="}"/>
+  </proposal>
+  <proposal key="\P{Upper}" value="\P{Upper}" allowPlain="true" displayString="大文字の英字でないもの (US-ASCII)" additionalInfo="\P{Upper} - (US-ASCII) 大文字の英字でないもの, [^A-Z]">
+    <wordtrigger word="\P{Upper" completion="}"/>
+  </proposal>
+  <proposal key="\p{ASCII}" value="\p{ASCII}" allowPlain="true" displayString="すべてのASCII文字" additionalInfo="\p{ASCII} - [\x00-\x7F]">
+    <wordtrigger word="\p{ASCII" completion="}"/>
+  </proposal>
+  <proposal key="\P{ASCII}" value="\P{ASCII}" allowPlain="true" displayString="ASCII文字でないもの" additionalInfo="\P{ASCII} - [^\x00-\x7F]">
+    <wordtrigger word="\P{ASCII" completion="}"/>
+  </proposal>
+  <proposal key="\p{Alpha}" value="\p{Alpha}" allowPlain="true" displayString="英字 (US-ASCII)" additionalInfo="\p{Alpha} - (US-ASCII) 英字, [a-zA-Z]">
+    <wordtrigger word="\p{Alpha" completion="}"/>
+  </proposal>
+  <proposal key="\P{Alpha}" value="\P{Alpha}" allowPlain="true" displayString="英字でないもの (US-ASCII)" additionalInfo="\P{Alpha} - (US-ASCII) 英字でないもの, [^a-zA-Z]">
+    <wordtrigger word="\P{Alpha" completion="}"/>
+  </proposal>
+  <proposal key="\p{Digit}" value="\p{Digit}" allowPlain="true" displayString="数字 (US-ASCII)" additionalInfo="\p{Digit} -  (US-ASCII) [0-9]">
+    <wordtrigger word="\p{Digit" completion="}"/>
+  </proposal>
+  <proposal key="\P{Digit}" value="\P{Digit}" allowPlain="true" displayString="数字でないもの (US-ASCII)" additionalInfo="\P{Digit} -  (US-ASCII) [^0-9]">
+    <wordtrigger word="\P{Digit" completion="}"/>
+  </proposal>
+  <proposal key="\p{Alnum}" value="\p{Alnum}" allowPlain="true" displayString="英数字 (US-ASCII)" additionalInfo="\p{Alnum} -  (US-ASCII) [a-zA-Z0-9]">
+    <wordtrigger word="\p{Alnum" completion="}"/>
+  </proposal>
+  <proposal key="\P{Alnum}" value="\P{Alnum}" allowPlain="true" displayString="英数字でないもの (US-ASCII)" additionalInfo="\P{Alnum} -  (US-ASCII) [^a-zA-Z0-9]">
+    <wordtrigger word="\P{Alnum" completion="}"/>
+  </proposal>
+  <proposal key="\p{Punct}" value="\p{Punct}" allowPlain="true" displayString="句読文字 (US-ASCII)" additionalInfo="\p{Punct} -  (US-ASCII) !&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~のいずれか">
+    <wordtrigger word="\p{Punct" completion="}"/>
+  </proposal>
+  <proposal key="\P{Punct}" value="\P{Punct}" allowPlain="true" displayString="句読文字でないもの (US-ASCII)" additionalInfo="\P{Punct} -  (US-ASCII) !&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~のどれでもない">
+    <wordtrigger word="\P{Punct" completion="}"/>
+  </proposal>
+  <proposal key="\p{Graph}" value="\p{Graph}" allowPlain="true" displayString="表示できる文字 (US-ASCII)" additionalInfo="\p{Graph} - (US-ASCII) 英数字,または句読文字">
+    <wordtrigger word="\p{Graph" completion="}"/>
+  </proposal>
+  <proposal key="\P{Graph}" value="\P{Graph}" allowPlain="true" displayString="表示できない文字 (US-ASCII)" additionalInfo="\P{Graph} - (US-ASCII) 英数字,または句読文字でないもの">
+    <wordtrigger word="\P{Graph" completion="}"/>
+  </proposal>
+  <proposal key="\p{Print}" value="\p{Print}" allowPlain="true" displayString="プリント可能文字 (US-ASCII)" additionalInfo="\p{Print} - (US-ASCII) 英数字,または句読文字">
+    <wordtrigger word="\p{Print" completion="}"/>
+  </proposal>
+  <proposal key="\P{Print}" value="\P{Print}" allowPlain="true" displayString="プリント不可能文字 (US-ASCII)" additionalInfo="\P{Print} - (US-ASCII) 英数字,または句読文字でないもの">
+    <wordtrigger word="\P{Print" completion="}"/>
+  </proposal>
+  <proposal key="\p{Blank}" value="\p{Blank}" allowPlain="true" displayString="スペース,またはタブ (US-ASCII)" additionalInfo="\p{Blank} - (US-ASCII) [ \t]">
+    <wordtrigger word="\p{Blank" completion="}"/>
+  </proposal>
+  <proposal key="\P{Blank}" value="\P{Blank}" allowPlain="true" displayString="スペース,またはタブでないもの (US-ASCII)" additionalInfo="\P{Blank} - (US-ASCII) [^ \t]">
+    <wordtrigger word="\P{Blank" completion="}"/>
+  </proposal>
+  <proposal key="\p{Cntrl}" value="\p{Cntrl}" allowPlain="true" displayString="制御文字 (US-ASCII)" additionalInfo="\p{Cntrl} - (US-ASCII) [\x00-\x1F\x7F]">
+    <wordtrigger word="\p{Cntrl" completion="}"/>
+  </proposal>
+  <proposal key="\P{Cntrl}" value="\P{Cntrl}" allowPlain="true" displayString="非制御文字 (US-ASCII)" additionalInfo="\P{Cntrl} - (US-ASCII) [^\x00-\x1F\x7F]">
+    <wordtrigger word="\P{Cntrl" completion="}"/>
+  </proposal>
+  <proposal key="\p{XDigit}" value="\p{XDigit}" allowPlain="true" displayString="16進数" additionalInfo="\p{XDigit} - [0-9a-fA-F]">
+    <wordtrigger word="\p{XDigit" completion="}"/>
+  </proposal>
+  <proposal key="\P{XDigit}" value="\P{XDigit}" allowPlain="true" displayString="16進数でないもの" additionalInfo="\P{XDigit} - [^0-9a-fA-F]">
+    <wordtrigger word="\P{XDigit" completion="}"/>
+  </proposal>
+  <proposal key="\p{Space}" value="\p{Space}" allowPlain="true" displayString="空白" additionalInfo="\p{Space} - [ \t\n\x0B\f\r]">
+    <wordtrigger word="\p{Space" completion="}"/>
+  </proposal>
+  <proposal key="\P{Space}" value="\P{Space}" allowPlain="true" displayString="空白でないもの" additionalInfo="\P{Space} - [^ \t\n\x0B\f\r]">
+    <wordtrigger word="\P{Space" completion="}"/>
+  </proposal>
+  <proposal key="\p{InGreek}" value="\p{InGreek}" allowPlain="true" displayString="ギリシャ語ブロック文字" additionalInfo="\p{InGreek} - ギリシャ語ブロック内の文字 [\x0370-\x03FF]">
+    <wordtrigger word="\p{InGreek" completion="}"/>
+  </proposal> 
+  <proposal key="\P{InGreek}" value="\P{InGreek}" allowPlain="true" displayString="非ギリシャ語ブロック文字" additionalInfo="\P{InGreek} - ギリシャ語ブロック内の文字でないもの [^\x0370-\x03FF]">
+    <wordtrigger word="\P{InGreek" completion="}"/>
+  </proposal> 
+  <proposal key="\p{InU}" value="\p{In}" allowPlain="true" displayString="Unicodeブロック U内" additionalInfo="\p{InU} - UnicodeブロックU内の文字 &#x000A;(ブロックの名前は以下で定義されている&#x000A;http://www.unicode.org/Public/3.0-Update/Blocks-3.txt, &#x000A;\p{InBasicLatin}で定義される'Basic Latin'などではスペースは除去される.)">
+    <wordtrigger word="\p{In" completion="}"/>
+    <retrigger re=".*(\\p\{In\p{Lu}\p{Alnum}*)$" completion="}"/>
+  </proposal> 
+  <proposal key="\P{InU}" value="\P{In}" allowPlain="true" displayString="Unicodeブロック U内でないもの" additionalInfo="\P{InU} - UnicodeブロックU内の文字でないもの &#x000A;(ブロックの名前は以下で定義されている&#x000A;http://www.unicode.org/Public/3.0-Update/Blocks-3.txt, &#x000A;\p{InBasicLatin}で定義される'Basic Latin'などではスペースは除去される.)">
+    <wordtrigger word="\P{In" completion="}"/>
+    <retrigger re=".*(\\P\{In\p{Lu}\p{Alnum}*)$" completion="}"/>
+  </proposal> 
+  <proposal key="\p{Lu}" value="\p{Lu}" allowPlain="true" displayString="大文字(Unicode)" additionalInfo="\p{Lu} - Unicodeカテゴリーの例: Uppercase letter">
+    <wordtrigger word="\p{Lu" completion="}"/>
+  </proposal> 
+  <proposal key="\p{Sc}" value="\p{Sc}" allowPlain="true" displayString="通貨記号(Unicode)" additionalInfo="\p{Sc} - Unicodeカテゴリーの例: Currency symbol">
+    <wordtrigger word="\p{Sc" completion="}"/>
+  </proposal> 
+  <proposal key="[\p{L}&amp;&amp;[^\p{Lu}]]" value="[\p{L}&amp;&amp;[^\p{Lu}]]" allowPlain="true" displayString="大文字以外の文字(Unicode)" additionalInfo="[\p{L}&amp;&amp;[^\p{Lu}] - Unicodeカテゴリーの交差の例 : \p{L} はすべての文字にマッチし, ^\p{Lu} はすべての大文字でない文字にマッチする">
+  </proposal> 
+  <proposal key="(?_U)" value="(?:)" allowPlain="true" displayString="前方参照を行わないグループ" additionalInfo="(?:U) - Uを前方参照を行わないグループとして定義する">
+    <retrigger re=".*\($" completion="?:)"/>
+    <retrigger re=".*\(\?$" completion=":)"/>
+    <retrigger re=".*\(\?:.*$" completion=")"/>
+  </proposal> 
+  <proposal key="(?idmsux)" value="(?)" allowPlain="true" displayString="フラグON (i, d, m, s, u, x)" additionalInfo="(?idmsux) - フラグのON (i: 大文字と小文字を区別しないマッチング, &#x000A;d: Unix ラインモード, m: 複数行モード, &#x000A;s: DOTALL モード, u:  Unicode に準拠した大文字と小文字を区別しないマッチング, &#x000A;x: 空白とコメントの無視 (#は行末まで)).">
+    <retrigger re=".*\($" completion="?)"/>
+    <retrigger re=".*\(\?([idmsux]+)$" completion=")"/>
+  </proposal> 
+  <proposal key="(?-idmsux)" value="(?-)" allowPlain="true" displayString="フラグOFF (i, d, m, s, u, x)" additionalInfo="(?-idmsux) - Turn off a flag (i: 大文字と小文字を区別しないマッチング, &#x000A;d: Unix ラインモード, m: 複数行モード, &#x000A;s: DOTALL モード, u:  Unicode に準拠した大文字と小文字を区別しないマッチング, &#x000A;x: 空白とコメントの無視 (#は行末まで)).">
+    <retrigger re=".*\($" completion="?-)"/>
+    <retrigger re=".*\(\?$" completion="-)"/>
+    <retrigger re=".*\(\?-([idmsux]+)$" completion=")"/>
+  </proposal> 
+  <proposal key="(?idmsux_U)" value="(?:)" allowPlain="true" displayString="グループでフラグのON (i, d, m, s, u, x)" additionalInfo="(?idmsux:U) - ブラケットで囲まれたグループのフラグを有効にする &#x000A;(前方一致グループじゃないよ!) (i: 大文字と小文字を区別しないマッチング, &#x000A;d: Unix ラインモード, m: 複数行モード, &#x000A;s: DOTALL モード, u:  Unicode に準拠した大文字と小文字を区別しないマッチング, &#x000A;x: 空白とコメントの無視 (#は行末まで)).">
+    <retrigger re=".*\($" completion="?:)"/>
+    <retrigger re=".*\(\?([idmsux]+)$" completion=":)"/>
+    <retrigger re=".*\(\?([idmsux]+:.*)$" completion=")"/>
+  </proposal> 
+  <proposal key="(?-idmsux_U)" value="(?-:)" allowPlain="true" displayString="グループでフラグのOFF (i, d, m, s, u, x)" additionalInfo="(?-idmsux:U) - ブラケットで囲まれたグループのフラグを無効にする &#x000A;(前方一致グループじゃないよ!) (i: 大文字と小文字を区別しないマッチング, &#x000A;d: Unix ラインモード, m: 複数行モード, &#x000A;s: DOTALL モード, u:  Unicode に準拠した大文字と小文字を区別しないマッチング, &#x000A;x: 空白とコメントの無視 (#は行末まで)).">
+    <retrigger re=".*\($" completion="?-:)"/>
+    <retrigger re=".*\(\?$" completion="-:)"/>
+    <retrigger re=".*\(\?-([idmsux]+)$" completion=":)"/>
+    <retrigger re=".*\(\?-([idmsux]+:.*)$" completion=")"/>
+  </proposal>
+</completions>
