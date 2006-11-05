@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QuickREx Plug-in
+Bundle-SymbolicName: de.babe.eclipse.plugins.QuickREx; singleton:=true
+Bundle-Version: 3.2.0
+Bundle-ClassPath: QuickREx.jar,lib/jakarta-oro-2.0.8.jar,lib/jregex1.2_01.jar,lib/jakarta-regexp-1.4.jar
+Bundle-Activator: de.babe.eclipse.plugins.quickREx.QuickRExPlugin
+Bundle-Vendor: Bastian Bergerhoff (info@bastian-bergerhoff.com)
+Bundle-Localization: plugin
+Export-Package: .,
+ de.babe.eclipse.plugins.quickREx,
+ de.babe.eclipse.plugins.quickREx.actions,
+ de.babe.eclipse.plugins.quickREx.dialogs,
+ de.babe.eclipse.plugins.quickREx.objects,
+ de.babe.eclipse.plugins.quickREx.regexp,
+ de.babe.eclipse.plugins.quickREx.regexp.jdk,
+ de.babe.eclipse.plugins.quickREx.regexp.jregex,
+ de.babe.eclipse.plugins.quickREx.regexp.oro,
+ de.babe.eclipse.plugins.quickREx.regexp.oro.awk,
+ de.babe.eclipse.plugins.quickREx.regexp.oro.perl,
+ de.babe.eclipse.plugins.quickREx.views,
+ org.apache.oro.io,
+ org.apache.oro.text,
+ org.apache.oro.text.awk,
+ org.apache.oro.text.perl,
+ org.apache.oro.text.regex,
+ org.apache.oro.util
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.ui.forms,
+ org.eclipse.search
+Eclipse-AutoStart: true
