@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QuickREx Application
+Bundle-SymbolicName: de.babe.eclipse.applications.QuickREx;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: de.babe.eclipse.applications.quickREx.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.help.appserver,
+ org.eclipse.help.base,
+ org.eclipse.help.ui,
+ org.eclipse.help.webapp,
+ org.eclipse.ui.intro,
+ de.babe.eclipse.plugins.QuickREx
+Eclipse-LazyStart: true
+Bundle-Vendor: Bastian Bergerhoff (info@bastian-bergerhoff.com)
+Export-Package: de.babe.eclipse.applications.quickREx

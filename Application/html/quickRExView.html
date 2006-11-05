@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy, see www.w3.org">
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1">
+    <link rel="STYLESHEET" href="book.css" charset="ISO-8859-1" type=
+    "text/css">
+
+    <title>Using the QuickREx View for testing and evaluating regular
+    expressions</title>
+  </head>
+
+  <body>
+<!--
+    <h2>Table of Contents</h2>
+    <a href="using.html">Using the QuickREx Application</a>
+    <ul>
+      <li><b>Using the QuickREx View for testing and evaluating regular expressions</b></li>
+      <li><a href="reLibView.html">Using the Reg. Exp. Library View for keeping and organizing regular expressions</a></li>
+    </ul>
+-->
+    <h1>Using the QuickREx View for testing and evaluating regular
+    expressions</h1>
+
+    <ul type="square">
+      <li><a href="#QuickRExViewDetails">The QuickREx View</a></li>
+      <li><a href="#testing">Testing Regular Expressions</a></li>
+      <li><a href="#timeOutAndOfflineEvaluation">Time-out and offline evaluation</a></li>
+      <li><a href="#selectingImpl">Selecting the Reg-Exp implementation</a></li>
+      <li><a href="#settingFlags">Setting global compiler-flags</a></li>
+      <li><a href="#tabCompletion">Using TAB-completion</a></li>
+      <li><a href="#grepping">Extracting all matches from text</a></li>
+    </ul>
+
+    <h2 name="QuickRExViewDetails">The QuickREx View</h2>
+
+    <p>The QuickREx-View is the part of QuickREx in which you can design, test and apply
+    regular expressions. It is displayed in the lower part of the application when you start
+    QuickREx.</p>
+
+    <p>The view looks as displayed in the screenshot below.</p>
+    <img alt="The QuickREx View" src="images/QuickRExView.png"> 
+
+    <p>The view is associated with the menu-entries in the menu "Evaluating". 
+    The menu is displayed below.</p>
+    <img alt="The QuickREx View-Menu" src="images/QuickRExViewMenu.png"/> 
+
+		<a name="testing"><h3>Testing Regular Expressions</h3></a>
+
+    <p>As you type text into the test-text area or a regular expression
+    into the area for the regular expressions, the expression is
+    constantly evaluated. The information on matches and groups is
+    updated on the fly and matches are highlighted in the
+    test-text.</p>
+
+    <p>Below is a screenshot of a situation where there are no groups
+    but several matches. The match highlighted in green is the current
+    one. All information on groups pertains to the current match.</p>
+    <img alt="The QuickREx View with matches" src="images/QuickREx2.png"/>
+
+    <p>The information next to the buttons used to navigate between the
+    matches is to be interpreted as "There are 7 matches altogether,
+    the current match (highlighted in green) has a start-index of 2 and
+    an end-index of 4". As you can see there are no groups in the
+    current match. You can navigate between the matches using the
+    'Previous' and 'Next' buttons near the label 'Matches'. If there
+    were groups in the current match, you could navigate through the
+    groups using the 'Previous' and 'Next' buttons near the label
+    'Groups'.</p>
+    <img alt="The QuickREx View with matches which have groups" src="images/QuickREx3.png"/></img>
+
+    <p>The above screenshot displays a case where there are groups in
+    the current match. The current group is indicated by a bold font
+    and the contents of the group are printed in the information-are
+    next to the group-navigation buttons. The information there is to
+    be interpreted as "There are 2 groups in the current match, the
+    current group is the first one, containing 'This is a long test-text for '".</p>
+
+		<a name="timeOutAndOfflineEvaluation"><h3>Time-out and offline evaluation</h3></a>
+
+    <p>Evaluation of the regular expression can be done
+    offline by unsetting the mark at <strong>'Live-evaluation'</strong> and using
+    the <strong>'Evaluate'</strong>-button if evaluation is in order.</p>
+
+    <p>Also, evaluation of the regular expression takes
+    place in a separate thread and may be cancelled by the user or is automatically
+    cancelled if it takes too long. The dialog for cancelling the evaluation appears
+    with a small delay so that you will not notice it during fast live-evaluation.</p>
+
+    <p>The time-out behaviour is configurable from the preference page available
+    under <strong>'Help &gt; Preferences...'</strong> in the category 
+    <strong>'QuickREx'</strong>. The preference page is displayed with the default settings
+    in the screenshot below.</p>
+
+		<img alt="The QuickREx preference-page" src="images/QuickRExPreferencePage.png"/></img>
+		
+		<a name="selectingImpl"><h3>Selecting the Reg-Exp implementation</h3></a>
+
+    <p>QuickREx offers the most widely used implementations of
+    Regular Expressions in the Java-world:</p>
+
+    <ul>
+      <li>JDK Regular Expressions (available since 1.4)</li>
+
+      <li>Jakarta ORO Perl-style Regular Expressions (ORO-Version
+      2.0.8, supports Perl 5.003 Regular Expressions)</li>
+
+      <li>Jakarta ORO Awk-style Regular Expressions (ORO-Version
+      2.0.8)</li>
+
+      <li>JRegex Regular Expressions (Version 1.2_01, supports 
+      Perl 5.6 Regular Expressions)</li>
+
+      <li>Jakarta Regexp Regular Expressions (Version 1.4)</li>
+    </ul>
+
+    <p>The default implementation is the JDK-one. To change the
+    implementation, use the menu "Evaluating" (see
+    screenshot above). The expression will immediatly be re-evaluated.
+    Also, the TAB-completion will adjust to offer the completions
+    defined for the selected implementation.</p>
+
+    <a name="settingFlags"><h3>Setting global compiler-flags</h3></a>
+
+    <p>You can set global compiler flags with any of the
+    implementations QuickREx offers. This is done at the bottom of the
+    view (see screenshot at the top of the page). To keep the view
+    small, the "Global Flags"-section is folded away when the view is
+    opened. To access it, click on the section-header.</p>
+
+    <p>The state of the flags is saved when you close the view or leave
+    the Workbench. Note that there are different flags depending on the
+    chosen implementation. Also note that the flags do behave slightly
+    differently, depending on the implementation chosen. Check the
+    tool-tip texts for the check-boxes to find details about the
+    individual flags (see screenshot).</p>
+    <img alt="The QuickREx View with an example tool-tip for a flag"
+    src="images/QuickREx4.png"> 
+
+    <a name="tabCompletion"><h3>Using TAB-completion</h3></a>
+
+    <p>You can use
+    TAB-completion for regular expressions in QuickREx. To get a list
+    of proposals for completion of the current expression, hit
+    'Ctrl+Space' while editing in the area for regular expressions. An
+    assistant will open as displayed in the below screenshot. Scrolling
+    through the suggestions also updates the hint on the right side of
+    the proposal. When you select a proposal, QuickREx will try to work
+    out whether the already typed in characters should be part of an
+    expression or not.</p>
+    <img alt="The code-completion assistant" src=
+    "images/TABCompletion.png"> 
+
+    <p>Note that due to the complexity of regular expressions,
+    TAB-completion is not as accurate as it is e.g. in a Java-editor.
+    Sometimes the proposed possibilities may result in illegal
+    patterns. Generally, QuickREx tries to do a good job in guessing
+    what you may want. To this end, the rules are roughly as
+    follows:</p>
+
+    <ul>
+      <li>Offer all completions which are not definitely illegal. Thus
+      for example, you will not be offered '+' ("Greedy match 1 or more
+      times") at the beginning of the regular expression - but almost
+      anything else.</li>
+
+      <li>Try to guess the intentions of the user in cases where things
+      are pretty clear. Offer things starting with the most likely
+      ones. They are the exceptions, but there are cases where it is
+      clear what the user is after. Thus, the input '\p{Lo' is very
+      likely part of '\p{Lower}'. This will be the first offer.</li>
+
+      <li>In case there are several potential completions even within
+      the rules, offer the shortest ones first. Thus, if you start with
+      '\' and ask for completion, you will be offered '\\', '\0', ...
+      before \p{Lower}. If you keep typing and the next character typed
+      is a 'p', you will notice how the order of proposals
+      changes.</li>
+    </ul>
+
+    <a name="grepping"><h3>Grep - extracting all matches from text</h3></a>
+
+    <p>If you want to extract only the matches for a particular regular
+    expression from the current test-text, simply select
+    '<strong>Grep</strong>' in the menu "Evaluating" (see above). 
+    A dialog as displayed below will open,
+    holding all matches separated by line-feeds. You can copy the
+    result from the dialog to the clipboard to use it anywhere else as
+    usually.</p>
+    <img alt="The dialog holding matches after grepping" src=
+    "images/GrepResult.png"> 
+
+    <p>&nbsp;</p>
+  </body>
+</html>

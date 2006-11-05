@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="de.babe.eclipse.applications.quickREx.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml">
+      </toc>
+      <toc
+            file="help.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.babe.eclipse.applications.quickREx.Perspective"
+            icon="icons/plugin.gif"
+            id="de.babe.eclipse.applications.quickREx.perspective"
+            name="Perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="de.babe.eclipse.plugins.quickREx.views.QuickRExView"
+            icon="icons/plugin.gif"
+            id="de.babe.eclipse.plugins.quickREx.views.QuickRExView"
+            name="QuickREx View">
+      </view>
+      <view
+            class="de.babe.eclipse.plugins.quickREx.views.RELibraryView"
+            icon="icons/plugin.gif"
+            id="de.babe.eclipse.plugins.quickREx.views.RELibraryView"
+            name="RE Library"/>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.babe.eclipse.applications.QuickREx.application"
+            name="QuickREx">
+         <property
+               name="aboutText"
+               value="QuickREx&#x0A;&#x0A;Version: 1.0.0&#x0A;QuickREx-Plugin-Version 3.2.0&#x0A;&#x0A;(c) Copyright Bastian Bergerhoff and others 2005, 2006.  All rights reserved.&#x0A;Published under the Eclipse Public License EPL v1.0&#x0A;&#x0A;This product is an open-source application build on top of Eclipse.&#x0A;Visit http://www.eclipse.org and http://sourceforge.net/projects/quickrex"/>
+         <property
+               name="windowImages"
+               value="icons/plugin.gif"/>
+         <property name="appName" value="QuickREx"/> 
+         <property
+               name="appImage"
+               value="icons/plugin.gif"/>
+         <property
+               name="aboutImage"
+               value="icons/plugin.gif"/>
+      </product>
+   </extension>
+
+</plugin>
