@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: QuickREx Plug-in
 Bundle-SymbolicName: de.babe.eclipse.plugins.QuickREx; singleton:=true
-Bundle-Version: 3.2.0
+Bundle-Version: 3.2.1
 Bundle-ClassPath: QuickREx.jar,lib/jakarta-oro-2.0.8.jar,lib/jregex1.2_01.jar,lib/jakarta-regexp-1.4.jar
 Bundle-Activator: de.babe.eclipse.plugins.quickREx.QuickRExPlugin
 Bundle-Vendor: Bastian Bergerhoff (info@bastian-bergerhoff.com)
@@ -32,3 +32,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.forms,
  org.eclipse.search
 Eclipse-AutoStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
