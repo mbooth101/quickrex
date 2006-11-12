@@ -52,7 +52,7 @@
             name="QuickREx">
          <property
                name="aboutText"
-               value="QuickREx&#x0A;&#x0A;Version: 1.0.0&#x0A;QuickREx-Plugin-Version 3.2.0&#x0A;&#x0A;(c) Copyright Bastian Bergerhoff and others 2005, 2006.  All rights reserved.&#x0A;Published under the Eclipse Public License EPL v1.0&#x0A;&#x0A;This product is an open-source application build on top of Eclipse.&#x0A;Visit http://www.eclipse.org and http://sourceforge.net/projects/quickrex"/>
+               value="QuickREx&#x0A;&#x0A;Version: 1.0.1&#x0A;QuickREx-Plugin-Version 3.2.1&#x0A;&#x0A;(c) Copyright Bastian Bergerhoff and others 2005, 2006.  All rights reserved.&#x0A;Published under the Eclipse Public License EPL v1.0&#x0A;&#x0A;This product is an open-source application build on top of Eclipse.&#x0A;Visit http://www.eclipse.org and http://sourceforge.net/projects/quickrex"/>
          <property
                name="windowImages"
                value="icons/plugin.gif"/>
