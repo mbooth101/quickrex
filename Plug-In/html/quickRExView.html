@@ -25,7 +25,7 @@
       </li>
       <li><a href="reLibView.html">Using the Reg. Exp. Library View for keeping and organizing regular expressions</a></li>
       <li><a href="settings.html">Changing Color- and Font-settings</a></li>
-      <li><a href="completions.html">Customizing TAB-completion</a></li>
+      <li><a href="completions.html">Customizing TAB-completion and the Edit-dialog</a></li>
     </ul>
 -->
     <h1>Using the QuickREx View for testing and evaluating regular
@@ -38,6 +38,7 @@
       <li><a href="#selectingImpl">Selecting the Reg-Exp implementation</a></li>
       <li><a href="#settingFlags">Setting global compiler-flags</a></li>
       <li><a href="#tabCompletion">Using TAB-completion</a></li>
+      <li><a href="#reEditDialog">Using the Reg-Exp-Edit dialog</a></li>
       <li><a href="#copyToJava">Copying Regular Expressions to Java-code</a></li>
       <li><a href="#grepping">Extracting all matches from text</a></li>
     </ul>
@@ -190,6 +191,29 @@
       is a 'p', you will notice how the order of proposals
       changes.</li>
     </ul>
+
+    <a name="#reEditDialog"><h3>Using the Reg-Exp-Edit dialog</h3></a>
+
+    <p>If you prefer a dialog with selection-lists and some bracket-highlighting
+    over the combo to edit the regular expression, click the 'Edit...'-button
+    to the right of the combo for the regular expression. The dialog displayed in the
+    following figure will open:</p>
+    
+    <img alt="The edit-dialog for regular expressions" src="images/reEditDialog.png"/></img>
+
+	<p>The dialog differs for the different flavours, since they offer different
+	options for multiplicities, wildcards, etc.</p> 
+	
+	<p>The text-field at the top of the dialog is used to type the regular expression. As
+	you change the expression, the plug-in-view updates and the expression is evaluated
+	against the current test-text (assuming you use live-evaluation). The text-field also
+	offers some bracket-highlighting.</p>
+	
+	<p>For expressions like wildcards etc, you will find the most commonly used options
+	in the drop-down-lists. Whenever a list-entry is selected, the field at the bottom
+	of the dialog displays a short explanation. If you want to use an expression, press
+	'Insert' next to the drop-down. The expression will be inserted at the current edit-position
+	of the regular expression.</p>
 
     <a name="copyToJava"><h3>Copying Regular Expressions to Java-code</h3></a>
 

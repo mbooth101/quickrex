@@ -1,11 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
  * 
  * Contributors:
  *     Georg Sendt - initial API and implementation
+ *     Bastian Bergerhoff - some minor cleanup
  *******************************************************************************/
 package de.babe.eclipse.plugins.quickREx.regexp.jregex;
 
@@ -16,19 +17,12 @@ import de.babe.eclipse.plugins.quickREx.regexp.Flag;
 /**
  * Class JavaFlag. This represents all flags for the JRegex implementation.
  * 
- * @author Georg Sendt
- * @version 1.0
- * @since 3.1
+ * @author Georg Sendt, Bastian Bergerhoff
+ * @version 1.1
+ * @since 3.5
  */
 public class JRegexFlag extends Flag {
   
-   /**
-    * All the foolowing options turned off
-    */
-  public static final Flag RE_DEFAULT = new JRegexFlag(
-      "de.babe.eclipse.plugins.quickREx.regexp.jregex.DEFAULT", REFlags.DEFAULT, Messages.getString("regexp.jregex.REFlag.default"), //$NON-NLS-1$ //$NON-NLS-2$
-      Messages.getString("regexp.jregex.REFlag.default.description")); //$NON-NLS-1$
-
   /**
    * Pattern "a" matches both "a" and "A".
    * Corresponds to "i" in Perl notation.
@@ -92,7 +86,6 @@ public class JRegexFlag extends Flag {
       Messages.getString("regexp.jregex.REFlag.xml_schema.description")); //$NON-NLS-1$
 
   static {
-    flags.put(RE_DEFAULT.getCode(), RE_DEFAULT);
     flags.put(RE_IGNORE_CASE.getCode(), RE_IGNORE_CASE);
     flags.put(RE_MULTILINE.getCode(), RE_MULTILINE);
     flags.put(RE_DOTALL.getCode(), RE_DOTALL);

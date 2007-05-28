@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--/*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
  * 
  * Contributors:
- *    Georg Sendt - initial contents
+ *     Bastian Bergerhoff - initial contents
  *******************************************************************************/-->
 <completions>
   <proposal key="\\" value="\\" allowPlain="true" displayString="Backslash" additionalInfo="\\">
@@ -123,6 +123,8 @@
   </proposal>
   <proposal key="(U)" value="()" allowPlain="true" displayString="Mark U as capturing group" additionalInfo="(U)">
     <retrigger re=".*\(.*$" completion=")"/> 
+  </proposal> 
+  <proposal key="\" value="\" allowPlain="true" displayString="Quote next character" additionalInfo="\ - Escape for special characters (e.g. \\ matches a Backslash)">
   </proposal> 
   <proposal key="[ecq]" value="[]" allowPlain="true" displayString="Character set" additionalInfo="Example: [ecq] - e, c or q">
     <retrigger re=".*\[(.*)$" completion="]"/>

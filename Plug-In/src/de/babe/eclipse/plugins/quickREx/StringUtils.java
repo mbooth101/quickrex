@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -47,7 +47,7 @@ public abstract class StringUtils {
    */
   public static String firstLine(String p_text) {
     if(p_text == null)
-      return "";
+      return ""; //$NON-NLS-1$
     
     if (p_text.indexOf("\r") >= 0) { //$NON-NLS-1$
       return p_text.substring(0, p_text.indexOf("\r")); //$NON-NLS-1$

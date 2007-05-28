@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2006 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -24,7 +24,7 @@ import de.babe.eclipse.plugins.quickREx.views.QuickRExView;
 public class OrganizeREsAction extends Action {
 
   public OrganizeREsAction() {
-    super("");
+    super(""); //$NON-NLS-1$
     this.setText(Messages
         .getString("views.QuickRExView.organizeREsAction.text")); //$NON-NLS-1$
     this.setToolTipText(Messages
@@ -32,7 +32,7 @@ public class OrganizeREsAction extends Action {
     this.setImageDescriptor(((PluginImageRegistry) QuickRExPlugin.getDefault()
         .getImageRegistry())
         .getImageDescriptor(PluginImageRegistry.IMG_ORGANIZE_RES));
-    this.setId("de.babe.eclipse.plugins.quickREx.actions.OrganizeREsAction");
+    this.setId("de.babe.eclipse.plugins.quickREx.actions.OrganizeREsAction"); //$NON-NLS-1$
   }
 
   public void run() {

@@ -20,20 +20,21 @@
 	</ul>		
 	<li><A href="reLibView.html">Using the Reg. Exp. Library View for keeping and organizing regular expressions</A></li>
 	<li><A href="settings.html">Changing Color- and Font-settings</A></li>
-	<li><b>Customizing TAB-completion</b></li>
+	<li><b>Customizing TAB-completion and the Edit-dialog</b></li>
 </ul>
 -->
-<h1>Customizing TAB-completion</h1>
+<h1>Customizing TAB-completion and the Edit-dialog</h1>
 
 	<p>All TAB-completions are defined in staticly read .xml-files. This means you can change most of
 	the behaviour of the code-completion feature. After a restart of Eclipse, your changes will be
 	immediately active.</p>
 	
-	<p>There are four .xml-files in the plugin-directory of QuickREx (to be found at the site of your
+	<p>Similarly, which building-blocks are displayed under which category in the Regular-Expression-Edit dialog
+	is defined in .xml-files which can be changed.</p>
+	
+	<p>There are ten .xml-files in the plugin-directory of QuickREx (to be found at the site of your
 	Eclipse-installation under 'plugins/de.babe.eclipse.plugins.QuickREx_x.y.z' with x.y.z being the 
-	version installed on your machine (this documentation applies to 1.2.0 and later, so in case your
-	installed version is earlier - please check for updates if you want to use the features described
-	here!):</p>
+	version installed on your machine:</p>
 	
 	<ul>
 	<li>jdkCompletion.xml</li>
@@ -42,8 +43,20 @@
 	<li>jregexCompletion.xml</li>
 	<li>jakartaRegexpCompletion.xml</li>
 	</ul>
+
+	<p>and</p>
+
+	<ul>
+	<li>jdkCategories.xml</li>
+	<li>oroAwkCategories.xml</li>
+	<li>oroPerlCategories.xml</li>
+	<li>jregexCategories.xml</li>
+	<li>jakartaRegexpCategories.xml</li>
+	</ul>
 	
-	<p>These contain the definitions for the code-completion feature applicable to the corresponding
+	<h2>The TAB-completion-configuration files</h2>
+	
+	<p>The files with the names "fooCompletion.xml" contain the definitions for the code-completion feature applicable to the corresponding
 	regular-expression implementation (names should be obvious).</p>
 	
 	<p>The following is an excerpt from the file jdkCompletion.xml which serves as an example for 
@@ -168,6 +181,49 @@
 	would need to construct a lot of <strong>retrigger</strong>s in this case, the wordtrigger is used.
 	A wordtrigger matches if the content ends with some 0-based substring of the word-attribute. It
 	adds the remainder of the word-attribute plus the contents of the 'completion'-attribute if selected.</p>
+	
+	<h2>The category-configuration files</h2>
+
+	<p>The files with the names "fooCategories.xml" contain the definitions for the 
+	categories and the mapping used for the Reg-Exp-Edit-dialog.</p>
+	
+	<p>The information is structured as follows (example from jdkCategories.xml):</p>
+	
+	<pre>
+    &lt;categoryMappings&gt;
+      &lt;categoryMapping proposalKey="?" category="Multiplicities"&gt;
+      &lt;/categoryMapping&gt;
+      ...
+      &lt;categoryMapping proposalKey="." category="Wildcards"&gt;
+      &lt;/categoryMapping&gt;
+      ...
+    &lt;/categoryMappings&gt;
+	</pre>
+
+	<p>For all proposals as defined in the proposal-configuration-file for the 
+	corresponding flavour, this file defines whether they should be used in the
+	edit-dialog at all and if so, under what list they should appear. It also defines,
+	what categories are to be displayed at all for the flavour.</p>
+	
+	<p>When the dialog is constructed, first all different "category"-attributes 
+	from the file are collected. For each category, a drop down is displayed. The order
+	on the dialog (from top to bottom) is identical to the order of appearance in the
+	.xml-file.</p>
+	
+	<p>Then, the proposals are mapped to the categories as defined by the categoryMapping-elements.
+	The proposals are displayed in the order of their appearance in the category-config file. 
+	For the drop-down, the value of the "displayString"-attribute from the proposal-config
+	file (for the entry with proposal.key == categoryMapping.proposalKey) is used.
+	The additional information-field in the dialog displays the value of the "additionalInfo"-attribute
+	for the proposal. When "Insert" is pressed, the value of the attribute "value" from the proposal-file
+	is inserted at the caret-position of the expression.</p>
+	
+	<p>Thus, to change the category of some entry, change the "category"-attribute.
+	To change the order of appearance, change the order in the file. (To change the
+	order of the categories, change the orders of the first entries for the respective 
+	categories.) To remove something from the lists all together, remove the mapping
+	from the file. And to have something new on the dialog, add the entry to the proposals- and 
+	the category-config-file.</p>
 	
 	<h2>Roll your own, share it with others</h2>
 	

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Bastian Bergerhoff and others
+ * Copyright (c) 2006, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -8,8 +8,6 @@
  *     Bastian Bergerhoff - initial API and implementation
  *******************************************************************************/
 package de.babe.eclipse.plugins.quickREx.editors;
-
-import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.contentassist.SubjectControlContentAssistant;
@@ -28,9 +26,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.commands.AbstractHandler;
-import org.eclipse.ui.commands.ExecutionException;
-import org.eclipse.ui.commands.IHandler;
 import org.eclipse.ui.contentassist.ContentAssistHandler;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
@@ -231,15 +226,6 @@ public class RELibraryEntryFormPage extends FormPage {
       }
     });
     regExpContentAssistant.install(new TextContentAssistSubjectAdapter(regExpText));
-    IHandler handler = new AbstractHandler() {
-      /* (non-Javadoc)
-       * @see org.eclipse.ui.commands.IHandler#execute(java.util.Map)
-       */
-      public Object execute(Map parameterValuesByName) throws ExecutionException {
-        regExpContentAssistant.showPossibleCompletions();
-        return null;
-      }
-    };
     ContentAssistHandler.createHandlerForText(regExpText, regExpContentAssistant);
   }
 

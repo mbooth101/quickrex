@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2006 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -25,13 +25,13 @@ import de.babe.eclipse.plugins.quickREx.views.QuickRExView;
 public class UseOROPerlREAction extends Action {
 
   public UseOROPerlREAction() {
-		super("", IAction.AS_RADIO_BUTTON);
+		super("", IAction.AS_RADIO_BUTTON); //$NON-NLS-1$
     this.setText(Messages.getString("views.QuickRExView.useOROPerlREAction.text")); //$NON-NLS-1$
     this.setToolTipText(Messages.getString("views.QuickRExView.useOROPerlREAction.tooltip")); //$NON-NLS-1$
     this.setChecked(QuickRExPlugin.getDefault().isUsingOROPerlRE());
     this.setImageDescriptor(((PluginImageRegistry)QuickRExPlugin.getDefault().getImageRegistry())
         .getImageDescriptor(PluginImageRegistry.IMG_ORO_PERL_LOGO));
-    this.setId("de.babe.eclipse.plugins.quickREx.actions.UseOROPerlREAction");
+    this.setId("de.babe.eclipse.plugins.quickREx.actions.UseOROPerlREAction"); //$NON-NLS-1$
 	}
 
 	public void run() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--/*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -199,7 +199,7 @@
     <retrigger re=".+\{\d*,$" completion="}+"/> 
     <retrigger re=".+\{\d*,\}$" completion="+"/> 
   </proposal> 
-  <proposal key="{n,m}?" value="{,}+" allowPlain="false" displayString="Match >= n times but &lt;= m times compared to full text" additionalInfo="{n,m}+ - match the preceeding expression at least n and at most m times. &#x000A;&#x000A;Possessive: reads the whole input and tries to match.">
+  <proposal key="{n,m}+" value="{,}+" allowPlain="false" displayString="Match >= n times but &lt;= m times compared to full text" additionalInfo="{n,m}+ - match the preceeding expression at least n and at most m times. &#x000A;&#x000A;Possessive: reads the whole input and tries to match.">
     <retrigger re=".*[^\\]$" completion="{,}+"/> 
     <retrigger re=".*\\\\$" completion="{,}+"/> 
     <retrigger re=".+\{\d*$" completion=",}+"/> 

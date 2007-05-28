@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2006 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -25,13 +25,13 @@ import de.babe.eclipse.plugins.quickREx.views.QuickRExView;
 public class UseJakartaRegexpAction extends Action {
 
   public UseJakartaRegexpAction() {
-		super("", IAction.AS_RADIO_BUTTON);
+		super("", IAction.AS_RADIO_BUTTON); //$NON-NLS-1$
     this.setText(Messages.getString("views.QuickRExView.useJakartaRegexpAction.text")); //$NON-NLS-1$
     this.setToolTipText(Messages.getString("views.QuickRExView.useJakartaRegexpAction.tooltip")); //$NON-NLS-1$
     this.setChecked(QuickRExPlugin.getDefault().isUsingJakartaRegexp());
     this.setImageDescriptor(((PluginImageRegistry)QuickRExPlugin.getDefault().getImageRegistry())
         .getImageDescriptor(PluginImageRegistry.IMG_JAKARTA_REGEXP_LOGO));
-    this.setId("de.babe.eclipse.plugins.quickREx.actions.UseJakartaRegexpAction");
+    this.setId("de.babe.eclipse.plugins.quickREx.actions.UseJakartaRegexpAction"); //$NON-NLS-1$
 	}
 
 	public void run() {

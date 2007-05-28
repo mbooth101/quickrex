@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2006 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
  * 
  * Contributors:
- *     Bastian Bergerhoff - initial API and implementation
+ *     Bastian Bergerhoff - initial API and implementation, all but:
  *     Georg Sendt - added JRegexp-related implementations
  *******************************************************************************/
 package de.babe.eclipse.plugins.quickREx;
@@ -44,8 +44,11 @@ import de.babe.eclipse.plugins.quickREx.objects.RegularExpression;
 import de.babe.eclipse.plugins.quickREx.objects.RegularExpressionsXMLHandler;
 import de.babe.eclipse.plugins.quickREx.preferences.QuickRExPreferencesPage;
 import de.babe.eclipse.plugins.quickREx.regexp.CompletionProposalXMLHandler;
+import de.babe.eclipse.plugins.quickREx.regexp.CompletionProposals;
+import de.babe.eclipse.plugins.quickREx.regexp.EditorCategoryMappingXMLHandler;
 import de.babe.eclipse.plugins.quickREx.regexp.Flag;
 import de.babe.eclipse.plugins.quickREx.regexp.MatchSetFactory;
+import de.babe.eclipse.plugins.quickREx.regexp.REEditorCategoryMapping;
 
 /**
  * @author bastian.bergerhoff, georg.sendt
@@ -64,6 +67,28 @@ public class QuickRExPlugin extends AbstractUIPlugin {
 
   private ArrayList listeners;
 
+  private HashMap jakCatMappings;
+
+  private HashMap jdkCatMappings;
+
+  private HashMap jRegexCatMappings;
+
+  private HashMap oroAwkCatMappings;
+
+  private HashMap oroPerlCatMappings;
+
+  private ArrayList jakCategories;
+
+  private ArrayList jdkCategories;
+
+  private ArrayList jRegexCategories;
+
+  private ArrayList oroAwkCategories;
+
+  private ArrayList oroPerlCategories;
+
+  private CompletionProposals proposals;
+
   private static final String RE_FILE_NAME = "regularExpressions.xml"; //$NON-NLS-1$
 
   private static final String RE_LIB_FILE_NAME = "$nl$/reLibrary.xml"; //$NON-NLS-1$
@@ -73,6 +98,8 @@ public class QuickRExPlugin extends AbstractUIPlugin {
   private static final String TEST_TEXT_FILE_NAME = "testTexts.xml"; //$NON-NLS-1$
 
   public static final String ID = "de.babe.eclipse.plugins.quickREx.QuickRExPlugin"; //$NON-NLS-1$
+
+  public static final String EXPAND_NAVIGATION_SECTION = "de.babe.eclipse.plugins.quickREx.QuickRExPlugin.ExpandNavigationSection"; //$NON-NLS-1$
 
   private static final String RE_FLAVOUR = "de.babe.eclipse.plugins.quickREx.QuickRExPlugin.REFlavour"; //$NON-NLS-1$
 
@@ -89,6 +116,16 @@ public class QuickRExPlugin extends AbstractUIPlugin {
   private static final String JREGEX_PROPOSAL_FILE_NAME = "$nl$/jregexCompletion.xml"; //$NON-NLS-1$
 
   private static final String JAKARTA_REGEX_PROPOSAL_FILE_NAME = "$nl$/jakartaRegexpCompletion.xml"; //$NON-NLS-1$
+
+  private static final String ORO_AWK_CATEGORIES_FILE_NAME = "$nl$/oroAwkCategories.xml"; //$NON-NLS-1$
+
+  private static final String ORO_PERL_CATEGORIES_FILE_NAME = "$nl$/oroPerlCategories.xml"; //$NON-NLS-1$
+
+  private static final String JDK_CATEGORIES_FILE_NAME = "$nl$/jdkCategories.xml"; //$NON-NLS-1$
+  
+  private static final String JREGEX_CATEGORIES_FILE_NAME = "$nl$/jregexCategories.xml"; //$NON-NLS-1$
+
+  private static final String JAKARTA_REGEX_CATEGORIES_FILE_NAME = "$nl$/jakartaRegexpCategories.xml"; //$NON-NLS-1$
 
   /**
    * The constructor.
@@ -121,6 +158,48 @@ public class QuickRExPlugin extends AbstractUIPlugin {
     regularExpressions = initREsFromFile();
     testTexts = initTestTextsFromFile();
     reBooks = initREBooksFromFile();
+    initProposals();
+    prepareRegexpCategories();
+  }
+
+  private void prepareRegexpCategories() {
+    jakCategories = new ArrayList();
+    jakCatMappings = new HashMap();
+    initCategoriesFromFile(jakCatMappings, jakCategories, MatchSetFactory.JAKARTA_REGEXP_FLAVOUR);
+    addProposalsToMappings(jakCategories, jakCatMappings, MatchSetFactory.JAKARTA_REGEXP_FLAVOUR);
+
+    jdkCategories = new ArrayList();
+    jdkCatMappings = new HashMap();
+    initCategoriesFromFile(jdkCatMappings, jdkCategories, MatchSetFactory.JAVA_FLAVOUR);
+    addProposalsToMappings(jdkCategories, jdkCatMappings, MatchSetFactory.JAVA_FLAVOUR);
+
+    jRegexCategories = new ArrayList();
+    jRegexCatMappings = new HashMap();
+    initCategoriesFromFile(jRegexCatMappings, jRegexCategories, MatchSetFactory.JREGEX_FLAVOUR);
+    addProposalsToMappings(jRegexCategories, jRegexCatMappings, MatchSetFactory.JREGEX_FLAVOUR);
+
+    oroAwkCategories = new ArrayList();
+    oroAwkCatMappings = new HashMap();
+    initCategoriesFromFile(oroAwkCatMappings, oroAwkCategories, MatchSetFactory.ORO_AWK_FLAVOUR);
+    addProposalsToMappings(oroAwkCategories, oroAwkCatMappings, MatchSetFactory.ORO_AWK_FLAVOUR);
+
+    oroPerlCategories = new ArrayList();
+    oroPerlCatMappings = new HashMap();
+    initCategoriesFromFile(oroPerlCatMappings, oroPerlCategories, MatchSetFactory.ORO_PERL_FLAVOUR);
+    addProposalsToMappings(oroPerlCategories, oroPerlCatMappings, MatchSetFactory.ORO_PERL_FLAVOUR);
+  }
+
+  private void addProposalsToMappings(ArrayList p_categories, HashMap p_catMappings, int p_flavour) {
+    for (Iterator iter = p_categories.iterator(); iter.hasNext();) {
+      String category = (String) iter.next();
+      ArrayList proposalKeys = (ArrayList)p_catMappings.get(category);
+      ArrayList proposalsForCat = new ArrayList();
+      for (Iterator iterator = proposalKeys.iterator(); iterator.hasNext();) {
+        String currentKey = ((REEditorCategoryMapping) iterator.next()).getProposalKey();
+        proposalsForCat.add(proposals.getProposal(p_flavour, currentKey));
+      }
+      p_catMappings.put(category, proposalsForCat);
+    }
   }
 
   /**
@@ -648,106 +727,130 @@ public class QuickRExPlugin extends AbstractUIPlugin {
   }
 
   /**
-   * Reads in the JDK-Completion-proposals file and creates the proposal-structures in the passed Collections/Maps.
+   * Initializes the passed structure with the completion proposals defined in XML-files.
+   * In case the files have already been parsed, the information is only copied to the
+   * passed instance. If the files were not parsed yet, this is done now...
    * 
-   * @param p_proposals
-   *          a HashMap to be filled with the proposals
-   * @param p_keys
-   *          an ArrayList to be filled with the keys
+   * @param p_proposals the structure to initialize
    */
-  public void initJDKCompletionsFromFile(HashMap p_proposals, ArrayList p_keys) {
-    try {
-      InputStream propFileStream = openStream(new Path(JDK_PROPOSAL_FILE_NAME), true);
-      SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-      parser.parse(propFileStream, new CompletionProposalXMLHandler(p_proposals, p_keys));
-    } catch (Exception ex) {
-      // nop, to be save
-      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString("QuickRExPlugin.error.message7"), ex); //$NON-NLS-1$
-      getLog().log(status);
+  public void initCompletionProposals(CompletionProposals p_proposals) {
+    if (this.proposals == null) {
+      initProposals();
     }
-  }
-
-  /**
-   * Reads in theORO-Awk-Completion-proposals file and creates the proposal-structures in the passed Collections/Maps.
-   * 
-   * @param p_proposals
-   *          a HashMap to be filled with the proposals
-   * @param p_keys
-   *          an ArrayList to be filled with the keys
-   */
-  public void initOROAwkCompletionsFromFile(HashMap p_proposals, ArrayList p_keys) {
-    try {
-      InputStream propFileStream = openStream(new Path(ORO_AWK_PROPOSAL_FILE_NAME), true);
-      SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-      parser.parse(propFileStream, new CompletionProposalXMLHandler(p_proposals, p_keys));
-    } catch (Exception ex) {
-      // nop, to be save
-      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString("QuickRExPlugin.error.message8"), ex); //$NON-NLS-1$
-      getLog().log(status);
-    }
-  }
-
-  /**
-   * Reads in the ORO-Perl-Completion-proposals file and creates the proposal-structures in the passed Collections/Maps.
-   * 
-   * @param p_proposals
-   *          a HashMap to be filled with the proposals
-   * @param p_keys
-   *          an ArrayList to be filled with the keys
-   */
-  public void initOROPerlCompletionsFromFile(HashMap p_proposals, ArrayList p_keys) {
-    try {
-      InputStream propFileStream = openStream(new Path(ORO_PERL_PROPOSAL_FILE_NAME), true);
-      SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-      parser.parse(propFileStream, new CompletionProposalXMLHandler(p_proposals, p_keys));
-    } catch (Exception ex) {
-      // nop, to be save
-      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString("QuickRExPlugin.error.message9"), ex); //$NON-NLS-1$
-      getLog().log(status);
-    }
+    proposals.copyValuesTo(p_proposals);
   }
   
-  /**
-   * Reads in the JRegex-Completion-proposals file and creates the proposal-structures in the passed Collections/Maps.
-   * 
-   * @param p_proposals
-   *          a HashMap to be filled with the proposals
-   * @param p_keys
-   *          an ArrayList to be filled with the keys
-   */
-  public void initJRegexCompletionsFromFile(HashMap p_proposals, ArrayList p_keys) {
+  private synchronized void initProposals() {
+    proposals = new CompletionProposals();
+
+    HashMap jdkProposals = new HashMap();
+    ArrayList jdkKeys = new ArrayList();
+    initCompletionsFromFile(jdkProposals, jdkKeys, MatchSetFactory.JAVA_FLAVOUR);
+    proposals.setKeys(MatchSetFactory.JAVA_FLAVOUR, jdkKeys);
+    proposals.setProposals(MatchSetFactory.JAVA_FLAVOUR, jdkProposals);
+    
+    HashMap oroPerlProposals = new HashMap();
+    ArrayList oroPerlKeys = new ArrayList();
+    initCompletionsFromFile(oroPerlProposals, oroPerlKeys, MatchSetFactory.ORO_PERL_FLAVOUR);
+    proposals.setKeys(MatchSetFactory.ORO_PERL_FLAVOUR, oroPerlKeys);
+    proposals.setProposals(MatchSetFactory.ORO_PERL_FLAVOUR, oroPerlProposals);
+    
+    HashMap oroAwkProposals = new HashMap();
+    ArrayList oroAwkKeys = new ArrayList();
+    initCompletionsFromFile(oroAwkProposals, oroAwkKeys, MatchSetFactory.ORO_AWK_FLAVOUR);
+    proposals.setKeys(MatchSetFactory.ORO_AWK_FLAVOUR, oroAwkKeys);
+    proposals.setProposals(MatchSetFactory.ORO_AWK_FLAVOUR, oroAwkProposals);
+    
+    HashMap jRegexpProposals = new HashMap();
+    ArrayList jRegexpKeys = new ArrayList();
+    initCompletionsFromFile(jRegexpProposals, jRegexpKeys, MatchSetFactory.JREGEX_FLAVOUR);
+    proposals.setKeys(MatchSetFactory.JREGEX_FLAVOUR, jRegexpKeys);
+    proposals.setProposals(MatchSetFactory.JREGEX_FLAVOUR, jRegexpProposals);
+    
+    HashMap jakartaProposals = new HashMap();
+    ArrayList jakartaKeys = new ArrayList();
+    initCompletionsFromFile(jakartaProposals, jakartaKeys, MatchSetFactory.JAKARTA_REGEXP_FLAVOUR);
+    proposals.setKeys(MatchSetFactory.JAKARTA_REGEXP_FLAVOUR, jakartaKeys);
+    proposals.setProposals(MatchSetFactory.JAKARTA_REGEXP_FLAVOUR, jakartaProposals);
+  }
+
+  private void initCompletionsFromFile(HashMap p_proposals, ArrayList p_keys, int p_flavour) {
+    String filepath = null;
+    String errorMsgKey = null;
+    switch (p_flavour) {
+      case MatchSetFactory.JAKARTA_REGEXP_FLAVOUR:
+        filepath = JAKARTA_REGEX_PROPOSAL_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.jakartaRegex.completion"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.JAVA_FLAVOUR:
+        filepath = JDK_PROPOSAL_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.message7"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.JREGEX_FLAVOUR:
+        filepath = JREGEX_PROPOSAL_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.jregex.completion"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.ORO_PERL_FLAVOUR:
+        filepath = ORO_PERL_PROPOSAL_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.message9"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.ORO_AWK_FLAVOUR:
+        filepath = ORO_AWK_PROPOSAL_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.message8"; //$NON-NLS-1$
+        break;
+      default:
+        throw new RuntimeException("Unknown Regexp-flavour!"); //$NON-NLS-1$
+    }
     try {
-      InputStream propFileStream = openStream(new Path(JREGEX_PROPOSAL_FILE_NAME), true);
+      InputStream propFileStream = openStream(new Path(filepath), true);
       SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
       parser.parse(propFileStream, new CompletionProposalXMLHandler(p_proposals, p_keys));
     } catch (Exception ex) {
       // nop, to be save
-      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString("QuickRExPlugin.error.readerror.jregex.completion"), ex); //$NON-NLS-1$
+      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString(errorMsgKey), ex); //$NON-NLS-1$
       getLog().log(status);
     }
   }
 
-  /**
-   * Reads in the Jakarta-Regexp-Completion-proposals file and creates the proposal-structures in the passed Collections/Maps.
-   * 
-   * @param p_proposals
-   *          a HashMap to be filled with the proposals
-   * @param p_keys
-   *          an ArrayList to be filled with the keys
-   */
-  public void initJakartaRegexpCompletionsFromFile(HashMap p_proposals, ArrayList p_keys) {
+  public void initCategoriesFromFile(HashMap p_mappings, ArrayList p_categories, int p_flavour) {
+    String filepath = null;
+    String errorMsgKey = null;
+    switch (p_flavour) {
+      case MatchSetFactory.JAKARTA_REGEXP_FLAVOUR:
+        filepath = JAKARTA_REGEX_CATEGORIES_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.jakartaRegex.categories"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.JAVA_FLAVOUR:
+        filepath = JDK_CATEGORIES_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.jdk.categories"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.JREGEX_FLAVOUR:
+        filepath = JREGEX_CATEGORIES_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.jregex.categories"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.ORO_PERL_FLAVOUR:
+        filepath = ORO_PERL_CATEGORIES_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.oroperl.categories"; //$NON-NLS-1$
+        break;
+      case MatchSetFactory.ORO_AWK_FLAVOUR:
+        filepath = ORO_AWK_CATEGORIES_FILE_NAME;
+        errorMsgKey = "QuickRExPlugin.error.readerror.oroawk.categories"; //$NON-NLS-1$
+        break;
+      default:
+        throw new RuntimeException("Unknown Regexp-flavour!"); //$NON-NLS-1$
+    }
     try {
-      InputStream propFileStream = openStream(new Path(JAKARTA_REGEX_PROPOSAL_FILE_NAME), true);
+      InputStream propFileStream = openStream(new Path(filepath), true);
       SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-      parser.parse(propFileStream, new CompletionProposalXMLHandler(p_proposals, p_keys));
+      parser.parse(propFileStream, new EditorCategoryMappingXMLHandler(p_mappings, p_categories));
     } catch (Exception ex) {
       // nop, to be save
-      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString("QuickRExPlugin.error.readerror.jakartaRegex.completion"), ex); //$NON-NLS-1$
+      IStatus status = new Status(IStatus.WARNING, QuickRExPlugin.ID, 3, Messages.getString(errorMsgKey), ex); //$NON-NLS-1$
       getLog().log(status);
     }
   }
 
-  /**
+ /**
    * Saves the values of all flags to the PreferenceStore, where any flag contained in the passed collection is saved as 'set', any flag known to the
    * MatchSetFactory but not contained in the passed Collection is saved as 'not set'.
    * 
@@ -854,6 +957,55 @@ public class QuickRExPlugin extends AbstractUIPlugin {
       return getPreferenceStore().getBoolean(QuickRExPreferencesPage.P_LIVE_EVAL);
     } else {
       return true;
+    }
+  }
+
+  /**
+   * Returns an ArrayList of Categories (in fact, Category-names) defined for the 
+   * passed RE-Flavour.
+   * 
+   * @param p_flavour the Flavour, one of the constants defined in MatchSetFactory
+   * @return an ArrayList of category-names (Strings) or null if the flavour is unkown
+   */
+  public ArrayList getRECategories(int p_flavour) {
+    switch (p_flavour) {
+      case MatchSetFactory.JAVA_FLAVOUR:
+        return jdkCategories;
+      case MatchSetFactory.ORO_PERL_FLAVOUR:
+        return oroPerlCategories;
+      case MatchSetFactory.ORO_AWK_FLAVOUR:
+        return oroAwkCategories;
+      case MatchSetFactory.JREGEX_FLAVOUR:
+        return jRegexCategories;
+      case MatchSetFactory.JAKARTA_REGEXP_FLAVOUR:
+        return jakCategories;
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Returns an HashMap of Expressions mapped to Categories defined for the 
+   * passed RE-Flavour.
+   * 
+   * @param p_flavour the Flavour, one of the constants defined in MatchSetFactory
+   * @return a HashMap containing category-names as keys and ArrayListe of RECompletionProposal-
+   *          instances as Objects.
+   */
+  public HashMap getREMappings(int p_flavour) {
+    switch (p_flavour) {
+      case MatchSetFactory.JAVA_FLAVOUR:
+        return jdkCatMappings;
+      case MatchSetFactory.ORO_PERL_FLAVOUR:
+        return oroPerlCatMappings;
+      case MatchSetFactory.ORO_AWK_FLAVOUR:
+        return oroAwkCatMappings;
+      case MatchSetFactory.JREGEX_FLAVOUR:
+        return jRegexCatMappings;
+      case MatchSetFactory.JAKARTA_REGEXP_FLAVOUR:
+        return jakCatMappings;
+      default:
+        return null;
     }
   }
 }

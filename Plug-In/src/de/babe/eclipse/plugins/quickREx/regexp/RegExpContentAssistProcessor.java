@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005, 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -11,7 +11,6 @@
 package de.babe.eclipse.plugins.quickREx.regexp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -37,41 +36,16 @@ import de.babe.eclipse.plugins.quickREx.QuickRExPlugin;
 public class RegExpContentAssistProcessor implements IContentAssistProcessor, ISubjectControlContentAssistProcessor {
 
   /**
-   * The available proposal strings.
+   * The available proposals.
    */
-  private final static HashMap jdkProposalStrings = new HashMap();
-
-  private final static HashMap oroPerlProposalStrings = new HashMap();
-
-  private final static HashMap oroAwkProposalStrings = new HashMap();
-
-  private final static HashMap jregexProposalStrings = new HashMap();
+  private final static CompletionProposals proposals = new CompletionProposals();
   
-  private final static HashMap jakartaRegexpProposalStrings = new HashMap();
-
-  /**
-   * The available proposal keys.
-   */
-  private final static ArrayList jdkProposalKeys = new ArrayList();
-
-  private final static ArrayList oroPerlProposalKeys = new ArrayList();
-
-  private final static ArrayList oroAwkProposalKeys = new ArrayList();
-
-  private final static ArrayList jregexProposalKeys = new ArrayList();
-
-  private final static ArrayList jakartaRegexpProposalKeys = new ArrayList();
-
   static {
     initializeProposals();
   }
 
   private static void initializeProposals() {
-    QuickRExPlugin.getDefault().initOROPerlCompletionsFromFile(oroPerlProposalStrings, oroPerlProposalKeys);
-    QuickRExPlugin.getDefault().initOROAwkCompletionsFromFile(oroAwkProposalStrings, oroAwkProposalKeys);
-    QuickRExPlugin.getDefault().initJDKCompletionsFromFile(jdkProposalStrings, jdkProposalKeys);
-    QuickRExPlugin.getDefault().initJRegexCompletionsFromFile(jregexProposalStrings, jregexProposalKeys);
-    QuickRExPlugin.getDefault().initJakartaRegexpCompletionsFromFile(jakartaRegexpProposalStrings, jakartaRegexpProposalKeys);
+    QuickRExPlugin.getDefault().initCompletionProposals(proposals);
   }
 
   /**
@@ -128,15 +102,15 @@ public class RegExpContentAssistProcessor implements IContentAssistProcessor, IS
     Set results = new TreeSet(new RECompletionProposalComparator());
     Iterator iter = null;
     if (QuickRExPlugin.getDefault().isUsingJavaRE()) {
-      iter = jdkProposalKeys.iterator();
+      iter = proposals.getKeys(MatchSetFactory.JAVA_FLAVOUR).iterator();
     } else if (QuickRExPlugin.getDefault().isUsingOROPerlRE()) {
-      iter = oroPerlProposalKeys.iterator();
+      iter = proposals.getKeys(MatchSetFactory.ORO_PERL_FLAVOUR).iterator();
     } else if (QuickRExPlugin.getDefault().isUsingOROAwkRE()) {
-      iter = oroAwkProposalKeys.iterator();
+      iter = proposals.getKeys(MatchSetFactory.ORO_AWK_FLAVOUR).iterator();
     } else if (QuickRExPlugin.getDefault().isUsingJRegex()) {
-      iter = jregexProposalKeys.iterator();
+      iter = proposals.getKeys(MatchSetFactory.JREGEX_FLAVOUR).iterator();
     } else if (QuickRExPlugin.getDefault().isUsingJakartaRegexp()) {
-      iter = jakartaRegexpProposalKeys.iterator();
+      iter = proposals.getKeys(MatchSetFactory.JAKARTA_REGEXP_FLAVOUR).iterator();
     } else {
       return new ICompletionProposal[0];
     }
@@ -176,15 +150,15 @@ public class RegExpContentAssistProcessor implements IContentAssistProcessor, IS
     RECompletionProposal proposal = null;
 
     if (QuickRExPlugin.getDefault().isUsingJavaRE()) {
-      proposal = (RECompletionProposal)jdkProposalStrings.get(proposalKey);
+      proposal = proposals.getProposal(MatchSetFactory.JAVA_FLAVOUR, proposalKey);
     } else if (QuickRExPlugin.getDefault().isUsingOROPerlRE()) {
-      proposal = (RECompletionProposal)oroPerlProposalStrings.get(proposalKey);
+      proposal = proposals.getProposal(MatchSetFactory.ORO_PERL_FLAVOUR, proposalKey);
     } else if (QuickRExPlugin.getDefault().isUsingOROAwkRE()) {
-      proposal = (RECompletionProposal)oroAwkProposalStrings.get(proposalKey);
+      proposal = proposals.getProposal(MatchSetFactory.ORO_AWK_FLAVOUR, proposalKey);
     } else if (QuickRExPlugin.getDefault().isUsingJRegex()) {
-      proposal = (RECompletionProposal)jregexProposalStrings.get(proposalKey);
+      proposal = proposals.getProposal(MatchSetFactory.JREGEX_FLAVOUR, proposalKey);
     } else if (QuickRExPlugin.getDefault().isUsingJakartaRegexp()) {
-      proposal = (RECompletionProposal)jakartaRegexpProposalStrings.get(proposalKey);
+      proposal = proposals.getProposal(MatchSetFactory.JAKARTA_REGEXP_FLAVOUR, proposalKey);
     } 
 
     try {

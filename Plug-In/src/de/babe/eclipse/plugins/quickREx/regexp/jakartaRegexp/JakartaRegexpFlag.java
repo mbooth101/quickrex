@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005 Bastian Bergerhoff and others
+ * Copyright (c) 2005 2007 Bastian Bergerhoff and others
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution.
@@ -20,13 +20,6 @@ import de.babe.eclipse.plugins.quickREx.regexp.Flag;
  */
 public class JakartaRegexpFlag extends Flag {
   
-   /**
-    * All the following options turned off
-    */
-  public static final Flag MATCH_NORMAL = new JakartaRegexpFlag(
-      "de.babe.eclipse.plugins.quickREx.regexp.jakartaRegexp.NORMAL", RE.MATCH_NORMAL, Messages.getString("regexp.jakartaRegexp.REFlag.normal"), //$NON-NLS-1$ //$NON-NLS-2$
-      Messages.getString("regexp.jakartaRegexp.REFlag.normal.description")); //$NON-NLS-1$
-
   /**
    * Pattern "a" matches both "a" and "A".
    * Corresponds to "i" in Perl notation.
@@ -49,7 +42,6 @@ public class JakartaRegexpFlag extends Flag {
       Messages.getString("regexp.jakartaRegexp.REFlag.multiline.description")); //$NON-NLS-1$
 
   static {
-    flags.put(MATCH_NORMAL.getCode(), MATCH_NORMAL);
     flags.put(MATCH_IGNORE_CASE.getCode(), MATCH_IGNORE_CASE);
     flags.put(MATCH_MULTILINE.getCode(), MATCH_MULTILINE);
   }
