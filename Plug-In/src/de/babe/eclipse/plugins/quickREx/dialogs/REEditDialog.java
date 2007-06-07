@@ -50,6 +50,7 @@ public class REEditDialog extends Dialog {
   private QuickRExView view;
   private ArrayList categories;
   private HashMap expressions;
+  private String currentText = "";
 
   /**
    * The constructor
@@ -71,7 +72,7 @@ public class REEditDialog extends Dialog {
    * @return the contents of the text-field.
    */
   public String getSelectedText() {
-    return text.getText();
+    return currentText;
   }
 
   /* (non-Javadoc)
@@ -193,7 +194,8 @@ public class REEditDialog extends Dialog {
     gd.horizontalSpan = 3;
     gd.widthHint = 450;
     text.setLayoutData(gd);
-    text.setText(view.getRegularExpression());
+    currentText = view.getRegularExpression();
+    text.setText(currentText);
     text.setSelection(view.getLastComboSelection());
     text.addModifyListener(new ModifyListener() {
       public void modifyText(ModifyEvent p_e) {
@@ -204,7 +206,8 @@ public class REEditDialog extends Dialog {
 
   private void handleTextModified() {
     updateMarkup();
-    view.setRegularExpression(text.getText());
+    currentText = text.getText();
+    view.setRegularExpression(currentText);
   }
   
   private void updateMarkup() {
